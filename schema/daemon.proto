@@ -27,12 +27,12 @@ service Daemon {
     rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
 
     rpc GetAllMessages(GetAllMessagesRequest) returns (GetAllMessagesResponse) {}
+
+    rpc GetNewMessages(GetNewMessagesRequest) returns (GetNewMessagesResponse) {}
     
     rpc GetOutboxMessages(GetOutboxMessagesRequest) returns (GetOutboxMessagesResponse) {}
 
     rpc GetSentMessages(GetSentMessagesRequest) returns (GetSentMessagesResponse) {}
-
-    rpc GetNewMessages(GetNewMessagesRequest) returns (GetNewMessagesResponse) {}
 
     rpc MessageSeen(MessageSeenRequest) returns (MessageSeenResponse) {}
 

@@ -57,7 +57,7 @@ message FriendInfo {
 }
 
 message GetFriendListResponse {
-    repeated FriendInfo friend_infos = 2;
+    repeated FriendInfo friend_infos = 1;
 }
 
 message GenerateFriendKeyRequest {

@@ -19,6 +19,7 @@ service Server {
 message RegisterInfo { 
   bytes public_key = 1;
   string beta_key = 2;
+  bytes galois_key = 3;
 }
 
 // RegisterResponse is a response to a RegisterInfo request.

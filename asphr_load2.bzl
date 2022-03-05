@@ -18,11 +18,7 @@ def load_asphr_repos2():
     # we don't register built tools here because make_tool currently fails to build on Mac
     # see this issue: https://github.com/bazelbuild/rules_foreign_cc/issues/859
     rules_foreign_cc_dependencies(
-        register_built_tools = False,
-        native_tools_toolchains = [
-            ":built_cmake_toolchain_linux",
-            ":built_ninja_toolchain_linux",
-        ],
+        register_built_tools = True,
     )
 
     rules_proto_dependencies()

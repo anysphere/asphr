@@ -15,8 +15,6 @@ def load_asphr_repos2():
 
     rules_proto_grpc_js_repos()
 
-    # we don't register built tools here because make_tool currently fails to build on Mac
-    # see this issue: https://github.com/bazelbuild/rules_foreign_cc/issues/859
     rules_foreign_cc_dependencies(
         register_built_tools = True,
     )

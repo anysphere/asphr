@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 #
 
-load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake_variant")
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -15,7 +15,7 @@ filegroup(
     visibility = ["//:__pkg__"],
 )
 
-cmake_variant(
+cmake(
     name = "seal",
     build_args = [
         "--verbose",

@@ -1,12 +1,6 @@
 name: Update Internal Workspace Commit Hash
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 
 jobs:
   update-anysphere:

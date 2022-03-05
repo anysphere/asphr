@@ -3,7 +3,7 @@ name: Update Internal Workspace Commit Hash
 on:
   push:
     paths-ignore:
-      - "WORKSPACE" # WORKSPACE is never transitive, so we ignore this
+      - "WORKSPACE" # WORKSPACE is never transitive, so we ignore this.
 
 jobs:
   update-anysphere:

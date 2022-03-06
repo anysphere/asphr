@@ -5,7 +5,6 @@
 
 """Setup asphr."""
 
-load("@bazel_tools//tools/cpp:cc_configure.bzl", "cc_configure")
 load("@rules_proto//proto:repositories.bzl", "rules_proto_toolchains")
 load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains")
@@ -17,8 +16,6 @@ def setup_asphr(asphr_path):
     Args:
         asphr_path: The path to the asphr repository.
     """
-
-    cc_configure()
 
     grpc_extra_deps()
 

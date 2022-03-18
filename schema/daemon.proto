@@ -28,6 +28,8 @@ service Daemon {
 
     rpc GetAllMessages(GetAllMessagesRequest) returns (GetAllMessagesResponse) {}
 
+    rpc GetAllMessagesStreamed(GetAllMessagesRequest) returns (stream GetAllMessagesResponse) {}
+
     rpc GetNewMessages(GetNewMessagesRequest) returns (GetNewMessagesResponse) {}
     
     rpc GetOutboxMessages(GetOutboxMessagesRequest) returns (GetOutboxMessagesResponse) {}

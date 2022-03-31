@@ -7,11 +7,11 @@ cc_library(
     name = "asphr_lib",
     srcs = [
         "asphr.hpp",
-        "assert.hpp"
     ],
     linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [
+        ":assert",
         ":utils",
         "//third_party/json",
         "@com_google_absl//absl/hash",
@@ -20,7 +20,6 @@ cc_library(
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
-        "@boost//:stacktrace",
     ],
 )
 
@@ -44,5 +43,25 @@ cc_test(
     deps = [
         ":utils",
         "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_library(
+    name = "assert",
+    hdrs = [
+        "assert.hpp",
+    ],
+    linkstatic = True,
+    deps = [
+        "@boost//:stacktrace",
+    ],
+)
+
+cc_binary(
+    name = "assert_manual_test",
+    srcs = ["assert_manual_test.cc"],
+    linkstatic = True,
+    deps = [
+        ":assert",
     ],
 )

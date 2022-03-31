@@ -90,6 +90,4 @@ def load_asphr_repos(asphr_path):
         ],
     )
 
-    load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
-    boost_deps()
 

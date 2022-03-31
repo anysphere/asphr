@@ -52,9 +52,10 @@ cc_library(
         "assert.hpp",
     ],
     linkstatic = True,
-    deps = [
-        "@boost//:stacktrace",
-    ],
+    deps = select({
+        ":opt_build": [],
+        "//conditions:default": ["@boost//:stacktrace"],
+    }),
 )
 
 cc_binary(
@@ -64,4 +65,11 @@ cc_binary(
     deps = [
         ":assert",
     ],
+)
+
+config_setting(
+    name = "opt_build",
+    values = {
+        "compilation_mode": "opt"
+    }
 )

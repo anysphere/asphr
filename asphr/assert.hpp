@@ -5,7 +5,11 @@
 
 #pragma once
 
+// if we are in opt mode, then don't include stacktrace!
+#ifndef NDEBUG
 #include <boost/stacktrace.hpp>
+#endif
+
 #include <iostream>
 
 // from:

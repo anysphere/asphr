@@ -59,7 +59,7 @@
 #define ASPHR_PREDICT_TRUE(x) (x)
 #endif
 
-// the following is copied from BOOST. license:
+// the following is inspired by BOOST. license:
 // Boost Software License - Version 1.0 - August 17th, 2003
 
 // Permission is hereby granted, free of charge, to any person or
@@ -84,50 +84,43 @@
 // WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-namespace _internal_assert {
-
-inline void assertion_failed(char const* expr, char const* msg) {
-  std::cerr << "Expression '" << expr << "' is false in function '" << __func__
-            << "': " << (msg ? msg : "<no msg>") << ".\n";
-  std::cerr << boost::stacktrace::stacktrace() << std::endl;
-  std::abort();
-}
-
-inline void assertion_failed_eq(char const* a, char const* b, char const* msg) {
-  std::cerr << "Values '" << a << "' and '" << b
-            << "' are different in function '" << __func__
-            << "': " << (msg ? msg : "<no msg>") << ".\n";
-  std::cerr << boost::stacktrace::stacktrace() << std::endl;
-  std::abort();
-}
-
-}  // namespace _internal_assert
 
 #define PRINT_CERR(x, x_val) std::cerr << x << " = " << x_val << std::endl
 
 // asserts
 #ifndef NDEBUG
-#define ASPHR_ASSERT_MSG(expr, msg)                         \
-  {                                                         \
-    (ASPHR_PREDICT_TRUE((expr))                             \
-         ? static_cast<void>(0)                             \
-         : _internal_assert::assertion_failed(#expr, msg)); \
+#define ASPHR_ASSERT_MSG(expr, msg)                                         \
+  {                                                                         \
+    if (ASPHR_PREDICT_TRUE(expr)) {                                         \
+      static_cast<void>(0);                                                 \
+    } else {                                                                \
+      std::cerr << "Assertion failed: Expression '" << #expr                \
+                << "' is false in function '" << __func__ << "' location '" \
+                << __FILE__ << ":" << __LINE__ << "': '" << msg << "'.\n";  \
+      std::cerr << boost::stacktrace::stacktrace() << std::endl;            \
+      std::abort();                                                         \
+    }                                                                       \
   }
-#define ASPHR_ASSERT(expr) ASPHR_ASSERT_MSG(expr, nullptr)
+#define ASPHR_ASSERT(expr) ASPHR_ASSERT_MSG(expr, "<no detail>")
 
-#define ASPHR_ASSERT_EQ_MSG(a, b, msg)                    \
-  {                                                       \
-    auto a_val = a;                                       \
-    auto b_val = b;                                       \
-    if (ASPHR_PREDICT_TRUE((a_val == b_val))) {           \
-      static_cast<void>(0);                               \
-    } else {                                              \
-      PRINT_CERR(#a, a_val);                              \
-      PRINT_CERR(#b, b_val);                              \
-      _internal_assert::assertion_failed_eq(#a, #b, msg); \
-    }                                                     \
+#define ASPHR_ASSERT_EQ_MSG(a, b, msg)                                     \
+  {                                                                        \
+    auto a_val = a;                                                        \
+    auto b_val = b;                                                        \
+    if (ASPHR_PREDICT_TRUE((a_val == b_val))) {                            \
+      static_cast<void>(0);                                                \
+    } else {                                                               \
+      PRINT_CERR(#a, a_val);                                               \
+      PRINT_CERR(#b, b_val);                                               \
+      std::cerr << "Assertion failed: Values '" << #a << "' and '" << #b   \
+                << "' are different in function '" << __func__             \
+                << "' location '" << __FILE__ << ":" << __LINE__ << "': '" \
+                << msg << "'.\n";                                          \
+      std::cerr << boost::stacktrace::stacktrace() << std::endl;           \
+      std::abort();                                                        \
+    }                                                                      \
   }
-#define ASPHR_ASSERT_EQ(a, b) ASPHR_ASSERT_EQ_MSG(a, b, nullptr)
+#define ASPHR_ASSERT_EQ(a, b) ASPHR_ASSERT_EQ_MSG(a, b, "<no detail>")
 
 #else
 #define ASPHR_ASSERT_MSG(expr, msg) static_cast<void>(0)

@@ -25,15 +25,15 @@ int counter() { return counter_glob++; }
 
 void foo(int i) {
   std::cout << "here " << i << std::endl;
-  ASPHR_ASSERT_EQ(counter(), 3);
-  ASPHR_ASSERT_MSG(i >= 1, "CRITICAL BUG PLS FIX");
+  //   ASPHR_ASSERT_EQ(counter(), 3);
+  ASPHR_ASSERT_MSG(i >= 1, "value of i: " << i);
   ASPHR_ASSERT(i >= 1);
   bar(--i);
 }
 
 int main(int argc, char** argv) {
   counter_glob = 3;
-  // ASPHR_ASSERT_EQ(1, 0);
+  //   ASPHR_ASSERT_EQ(1, 0);
   foo(3);
   std::cout << "Hello, world! !" << std::endl;
   assert(false);

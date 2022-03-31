@@ -1,6 +1,6 @@
-
 #pragma once
 
+#include <boost/stacktrace.hpp>
 #include <iostream>
 
 // from:
@@ -78,29 +78,53 @@
 // FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
+namespace _internal_assert {
 
 inline void assertion_failed_msg(char const* expr, char const* msg) {
   std::cerr << "Expression '" << expr << "' is false in function '" << __func__
-            << "': " << (msg ? msg : "<no msg>") << ".\n"
-            << "Backtrace:\n"
-            << boost::stacktrace::stacktrace() << '\n';
-  std::abort();
+            << "': " << (msg ? msg : "<no msg>") << ".\n";
+}
+
+inline void assertion_different_msg(char const* val1, char const* val2,
+                                    char const* msg) {
+  std::cerr << "Values '" << val1 << "' and '" << val2
+            << "' are different in function '" << __func__
+            << "': " << (msg ? msg : "<no msg>") << ".\n";
 }
 
 inline void assertion_failed(char const* expr) {
   assertion_failed_msg(expr, nullptr);
+  std::cerr << boost::stacktrace::stacktrace() << std::endl;
+  std::abort();
 }
 
 inline void assertion_failed_eq(char const* a, char const* b) {
-  assertion_failed_msg(expr, nullptr);
+  assertion_different_msg(a, b, nullptr);
+  std::cerr << boost::stacktrace::stacktrace() << std::endl;
+  std::abort();
 }
 
+}  // namespace _internal_assert
+
+#define PRINT_CERR(x) std::cerr << #x << " = " << x << std::endl
+
 // asserts
-#ifdef DEBUG
-#define ASPHR_ASSERT(expr) \
-  (ABSL_PREDICT_TRUE((expr)) ? static_cast<void>(0) : assertion_failed(#expr))
-#define ASPHR_ASSERT_EQ(a, b)                         \
-  (ABSL_PREDICT_TRUE((a == b)) ? static_cast<void>(0) \
-                               : assertion_failed_eq(#a, #b))
+#ifndef NDEBUG
+#define ASPHR_ASSERT(expr)                                                    \
+  {                                                                           \
+    (ASPHR_PREDICT_TRUE((expr)) ? static_cast<void>(0)                        \
+                                : _internal_assert::assertion_failed(#expr)); \
+  }
+
+#define ASPHR_ASSERT_EQ(a, b)                      \
+  if (ASPHR_PREDICT_TRUE((a == b))) {              \
+    static_cast<void>(0);                          \
+  } else {                                         \
+    PRINT_CERR(a);                                 \
+    PRINT_CERR(b);                                 \
+    _internal_assert::assertion_failed_eq(#a, #b); \
+  }
 #else
+#define ASPHR_ASSERT(expr) static_cast<void>(0)
+#define ASPHR_ASSERT_EQ(a, b) static_cast<void>(0)
 #endif

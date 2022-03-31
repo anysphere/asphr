@@ -7,6 +7,7 @@ cc_library(
     name = "asphr_lib",
     srcs = [
         "asphr.hpp",
+        "assert.hpp"
     ],
     linkstatic = True,
     visibility = ["//visibility:public"],
@@ -19,6 +20,7 @@ cc_library(
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
+        "@boost//:stacktrace",
     ],
 )
 

@@ -6,6 +6,11 @@
 #pragma once
 
 #include <iostream>
+#include "absl/strings/str_cat.h"
+#include "absl/time/clock.h"
+#include "absl/time/time.h"
+
+#include "foreach.hpp"
 
 /*
 ASPHR_LOG is the simplest possible logging mechanism.
@@ -50,10 +55,14 @@ Default is ASPHR_LOGLEVEL_DEBUG.
 
 #if defined(ASPHR_LOGLEVEL_ERR) || defined(ASPHR_LOGLEVEL_INFO) || \
     defined(ASPHR_LOGLEVEL_DEBUG)
+#define EXPAND_LABEL(x) absl::StrCat(" ", #x, "=")
+#define EXPAND_VALUE(x) x
 #define ASPHR_LOG_ERR(msg, ...)                                    \
   {                                                                \
-    auto s = asbl::StrCat("[", __FILE__, ":", __LINE__, "] ", msg, \
-                          __VA_ARGS__, "\n");                      \
+    absl::Time t1 = absl::Now(); \
+absl::TimeZone utc =  absl::UTCTimeZone(); \
+    auto s = absl::StrCat("[", absl::FormatTime(t1, utc), " ", __FILE__, ":", __LINE__, "] ", msg, \
+                          __VA_OPT__(FOR_EACH2(EXPAND_LABEL, EXPAND_VALUE, __VA_ARGS__),) "\n");                      \
     std::cerr << s;                                                \
     std::cerr.flush();                                             \
   }

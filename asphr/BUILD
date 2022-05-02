@@ -13,6 +13,7 @@ cc_library(
     deps = [
         ":assert",
         ":utils",
+        ":log",
         "//third_party/json",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/random",
@@ -64,6 +65,28 @@ cc_binary(
     linkstatic = True,
     deps = [
         ":assert",
+    ],
+)
+
+cc_library(
+    name = "log",
+    hdrs = [
+        "log.hpp",
+        "foreach.hpp"
+    ],
+    linkstatic = True,
+    deps = [
+        "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/time",
+    ]
+)
+
+cc_binary(
+    name = "log_manual_test",
+    srcs = ["log_manual_test.cc"],
+    linkstatic = True,
+    deps = [
+        ":log",
     ],
 )
 

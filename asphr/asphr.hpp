@@ -32,6 +32,7 @@
 #include "absl/time/clock.h"
 #include "absl/time/time.h"
 #include "assert.hpp"
+#include "log.hpp"
 #include "third_party/json/nlohmann_json.h"
 #include "utils.hpp"
 

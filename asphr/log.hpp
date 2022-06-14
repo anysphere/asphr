@@ -61,10 +61,11 @@ Default is ASPHR_LOGLEVEL_DBG.
 #define ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, level, ...)                  \
   {                                                                        \
     absl::Time t1 = absl::Now();                                           \
-    absl::TimeZone utc = absl::UTCTimeZone();                              \
     auto s = absl::StrCat(                                                 \
-        "[", absl::FormatTime(t1, utc), " ", __FILE__, ":", __LINE__, " ", \
-        level, "] ", msg,                                                  \
+        "[",                                                               \
+        absl::FormatTime("%Y-%m-%d%ET%H:%M:%E2S%Ez", t1,                   \
+                         absl::LocalTimeZone()),                           \
+        " ", __FILE__, ":", __LINE__, " ", level, "] ", msg,               \
         __VA_OPT__(ASPHR_FOR_EACH2(ASPHR_EXPAND_LABEL, ASPHR_EXPAND_VALUE, \
                                    __VA_ARGS__), ) "\n");                  \
     std::cerr << s;                                                        \

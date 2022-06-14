@@ -6,10 +6,10 @@
 #pragma once
 
 #include <iostream>
+
 #include "absl/strings/str_cat.h"
 #include "absl/time/clock.h"
 #include "absl/time/time.h"
-
 #include "foreach.hpp"
 
 /*
@@ -53,19 +53,39 @@ Default is ASPHR_LOGLEVEL_DEBUG.
 #define ASPHR_LOGLEVEL_DEBUG
 #endif
 
+#define ASPHR_EXPAND_LABEL(x) absl::StrCat(" ", #x, "=")
+#define ASPHR_EXPAND_VALUE(x) x
+#define ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, level, ...)                  \
+  {                                                                        \
+    absl::Time t1 = absl::Now();                                           \
+    absl::TimeZone utc = absl::UTCTimeZone();                              \
+    auto s = absl::StrCat(                                                 \
+        "[", absl::FormatTime(t1, utc), " ", __FILE__, ":", __LINE__, " ", \
+        level, "] ", msg,                                                  \
+        __VA_OPT__(ASPHR_FOR_EACH2(ASPHR_EXPAND_LABEL, ASPHR_EXPAND_VALUE, \
+                                   __VA_ARGS__), ) "\n");                  \
+    std::cerr << s;                                                        \
+    std::cerr.flush();                                                     \
+  }
+
 #if defined(ASPHR_LOGLEVEL_ERR) || defined(ASPHR_LOGLEVEL_INFO) || \
     defined(ASPHR_LOGLEVEL_DEBUG)
-#define EXPAND_LABEL(x) absl::StrCat(" ", #x, "=")
-#define EXPAND_VALUE(x) x
-#define ASPHR_LOG_ERR(msg, ...)                                    \
-  {                                                                \
-    absl::Time t1 = absl::Now(); \
-absl::TimeZone utc =  absl::UTCTimeZone(); \
-    auto s = absl::StrCat("[", absl::FormatTime(t1, utc), " ", __FILE__, ":", __LINE__, "] ", msg, \
-                          __VA_OPT__(FOR_EACH2(EXPAND_LABEL, EXPAND_VALUE, __VA_ARGS__),) "\n");                      \
-    std::cerr << s;                                                \
-    std::cerr.flush();                                             \
-  }
+#define ASPHR_LOG_ERR(msg, ...) \
+  ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "ERR", __VA_ARGS__)
 #else
 #define ASPHR_LOG_ERR(msg, ...) static_cast<void>(0)
+#endif
+
+#if defined(ASPHR_LOGLEVEL_INFO) || defined(ASPHR_LOGLEVEL_DEBUG)
+#define ASPHR_LOG_INFO(msg, ...) \
+  ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "INFO", __VA_ARGS__)
+#else
+#define ASPHR_LOG_INFO(msg, ...) static_cast<void>(0)
+#endif
+
+#if defined(ASPHR_LOGLEVEL_DEBUG)
+#define ASPHR_LOG_DBG(msg, ...) \
+  ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "DBG", __VA_ARGS__)
+#else
+#define ASPHR_LOG_DBG(msg, ...) static_cast<void>(0)
 #endif

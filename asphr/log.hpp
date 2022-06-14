@@ -35,22 +35,25 @@ wins.
 We log to stderr only.
 
 Log level is set at compile time:
-- ASPHR_LOGLEVEL_NONE: log only errors
+- ASPHR_LOGLEVEL_NONE: log nothing
 - ASPHR_LOGLEVEL_ERR: log only errors
-- ASPHR_LOGLEVEL_INFO: log errors and info
-- ASPHR_LOGLEVEL_DEBUG: log everything
+- ASPHR_LOGLEVEL_WARN: log errors and warnings
+- ASPHR_LOGLEVEL_INFO: log errors and warnings and info
+- ASPHR_LOGLEVEL_DBG: log everything
 
-Default is ASPHR_LOGLEVEL_DEBUG.
+Default is ASPHR_LOGLEVEL_DBG.
 
 */
 
 // ASPHR_LOG_ERR(msg, key, value, key, value, ...)
+// ASPHR_LOG_WARN(msg, key, value, key, value, ...)
 // ASPHR_LOG_INFO(msg, key, value, key, value, ...)
 // ASPHR_LOG_DBG(msg, key, value, key, value, ...)
 
-#if !defined(ASPHR_LOGLEVEL_NONE) && !defined(ASPHR_LOGLEVEL_ERR) && \
-    !defined(ASPHR_LOGLEVEL_INFO) && !defined(ASPHR_LOGLEVEL_DEBUG)
-#define ASPHR_LOGLEVEL_DEBUG
+#if !defined(ASPHR_LOGLEVEL_NONE) && !defined(ASPHR_LOGLEVEL_ERR) &&  \
+    !defined(ASPHR_LOGLEVEL_WARN) && !defined(ASPHR_LOGLEVEL_INFO) && \
+    !defined(ASPHR_LOGLEVEL_DBG)
+#define ASPHR_LOGLEVEL_DBG
 #endif
 
 #define ASPHR_EXPAND_LABEL(x) absl::StrCat(" ", #x, "=")
@@ -68,22 +71,30 @@ Default is ASPHR_LOGLEVEL_DEBUG.
     std::cerr.flush();                                                     \
   }
 
-#if defined(ASPHR_LOGLEVEL_ERR) || defined(ASPHR_LOGLEVEL_INFO) || \
-    defined(ASPHR_LOGLEVEL_DEBUG)
+#if defined(ASPHR_LOGLEVEL_ERR) || defined(ASPHR_LOGLEVEL_WARN) || \
+    defined(ASPHR_LOGLEVEL_INFO) || defined(ASPHR_LOGLEVEL_DBG)
 #define ASPHR_LOG_ERR(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "ERR", __VA_ARGS__)
 #else
 #define ASPHR_LOG_ERR(msg, ...) static_cast<void>(0)
 #endif
 
-#if defined(ASPHR_LOGLEVEL_INFO) || defined(ASPHR_LOGLEVEL_DEBUG)
+#if defined(ASPHR_LOGLEVEL_WARN) || defined(ASPHR_LOGLEVEL_INFO) || \
+    defined(ASPHR_LOGLEVEL_DBG)
+#define ASPHR_LOG_WARN(msg, ...) \
+  ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "WARN", __VA_ARGS__)
+#else
+#define ASPHR_LOG_WARN(msg, ...) static_cast<void>(0)
+#endif
+
+#if defined(ASPHR_LOGLEVEL_INFO) || defined(ASPHR_LOGLEVEL_DBG)
 #define ASPHR_LOG_INFO(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "INFO", __VA_ARGS__)
 #else
 #define ASPHR_LOG_INFO(msg, ...) static_cast<void>(0)
 #endif
 
-#if defined(ASPHR_LOGLEVEL_DEBUG)
+#if defined(ASPHR_LOGLEVEL_DBG)
 #define ASPHR_LOG_DBG(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "DBG", __VA_ARGS__)
 #else

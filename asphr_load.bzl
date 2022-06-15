@@ -92,4 +92,16 @@ def load_asphr_repos(asphr_path):
         patches = [asphr_path + "//:rules_boost.patch"], # issue: https://github.com/nelhage/rules_boost/issues/160 (on certain linux distros, clang cannot find backtrace.h. see https://www.boost.org/doc/libs/1_71_0/doc/html/stacktrace/configuration_and_build.html#stacktrace.configuration_and_build.f3)
     )
 
+    # To find additional information on this release or newer ones visit:
+    # https://github.com/bazelbuild/rules_rust/releases
+    http_archive(
+        name = "rules_rust",
+        sha256 = "39655ab175e3c6b979f362f55f58085528f1647957b0e9b3a07f81d8a9c3ea0a",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_rust/releases/download/0.2.0/rules_rust-v0.2.0.tar.gz",
+            "https://github.com/bazelbuild/rules_rust/releases/download/0.2.0/rules_rust-v0.2.0.tar.gz",
+        ],
+    )
+
+
 

@@ -7,6 +7,8 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+RUST_VERSION = "1.61.0"
+
 def load_asphr_repos(asphr_path):
     """Loads the repositories for the asphr project.
 
@@ -96,11 +98,18 @@ def load_asphr_repos(asphr_path):
     # https://github.com/bazelbuild/rules_rust/releases
     http_archive(
         name = "rules_rust",
-        sha256 = "39655ab175e3c6b979f362f55f58085528f1647957b0e9b3a07f81d8a9c3ea0a",
+        sha256 = "872b04538ca20dad94791c348623f079ba93daf274c1d57ae6bfe0930ec77f0d",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_rust/releases/download/0.2.0/rules_rust-v0.2.0.tar.gz",
-            "https://github.com/bazelbuild/rules_rust/releases/download/0.2.0/rules_rust-v0.2.0.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_rust/releases/download/0.6.0/rules_rust-v0.6.0.tar.gz",
+        "https://github.com/bazelbuild/rules_rust/releases/download/0.6.0/rules_rust-v0.6.0.tar.gz",
         ],
+    )
+
+    http_archive(
+        name = "cxx.rs",
+        sha256 = "6fed9ef1c64a37c343727368b38c27fa4e15b27ca9924c6672a6a5496080c832",
+        strip_prefix = "cxx-1.0.68",
+        urls = ["https://github.com/dtolnay/cxx/archive/refs/tags/1.0.68.tar.gz"],
     )
 
 

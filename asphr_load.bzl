@@ -110,6 +110,8 @@ def load_asphr_repos(asphr_path):
         sha256 = "6fed9ef1c64a37c343727368b38c27fa4e15b27ca9924c6672a6a5496080c832",
         strip_prefix = "cxx-1.0.68",
         urls = ["https://github.com/dtolnay/cxx/archive/refs/tags/1.0.68.tar.gz"],
+        patch_args = ["-p1"],
+        patches = [asphr_path + "//:cxx.patch"], # issue: we want to derive custom traits in Rust that C++ doesn't necessarily need to know about!
     )
 
 

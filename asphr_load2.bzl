@@ -13,6 +13,8 @@ load("@com_grail_bazel_toolchain//toolchain:deps.bzl", "bazel_toolchain_dependen
 load("@com_grail_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+load("@rules_rust//tools/rust_analyzer:deps.bzl", "rust_analyzer_deps")
+
 
 def load_asphr_repos2():
     """Loads the remaining repositories for the asphr project (those that depend on load_asphr_repos())."""
@@ -38,3 +40,6 @@ def load_asphr_repos2():
     rules_rust_dependencies()
 
     rust_register_toolchains(version = "1.61.0", edition="2021")
+
+    rust_analyzer_deps()
+

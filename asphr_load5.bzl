@@ -18,6 +18,9 @@ def load_asphr_repos5():
                 version = "1.4.8",
                 features = ["sqlite"]
             ),
+            "cxx": crate.spec(
+                version = "1.0"
+            )
         },
         # Setting the default package name to `""` forces the use of the macros defined in this repository
         # to always use the root package when looking for dependencies or aliases. This should be considered

@@ -9,12 +9,12 @@ load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_repository", "rend
 load("@cxx.rs//tools/bazel:vendor.bzl", rust_cxx_vendor = "vendor")
 load(":asphr_load.bzl", "RUST_VERSION")
 
-def load_asphr_repos5():
+def load_asphr_repos5(asphr_path):
     """Loads the remaining repositories for the asphr project (those that depend on load_asphr_repos4())."""
 
     crates_repository(
         name = "crate_index",
-        lockfile = "//:Cargo.Bazel.lock",
+        lockfile = asphr_path + "//:Cargo.Bazel.lock",
         packages = {
             "diesel": crate.spec(
                 version = "1.4.8",

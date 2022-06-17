@@ -24,6 +24,8 @@ service Daemon {
 
     rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {}
 
+    rpc SendFriendRequestAsync(SendFriendRequestAsyncRequest) returns (SendFriendRequestAsyncResponse) {}
+
     rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
 
     rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
@@ -83,6 +85,16 @@ message RemoveFriendRequest {
 }
 
 message RemoveFriendResponse {}
+
+message SendFriendRequestAsyncRequest {
+    string friend_request_public_key = 1;
+    string kx_public_key = 2;
+    int32 allocation = 3;
+    string name = 4;
+}
+
+message SendFriendRequestAsyncResponse {
+}
 
 message SendMessageRequest {
     string name = 1;

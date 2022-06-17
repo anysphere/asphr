@@ -13,6 +13,11 @@ service Server {
   // Sending and receiving protobufs
   rpc SendMessage(SendMessageInfo) returns (SendMessageResponse) {}
   rpc ReceiveMessage(ReceiveMessageInfo) returns (ReceiveMessageResponse) {}
+
+  // Making Friends protobufs
+  rpc AddFriendAsync(AddFriendAsyncInfo) returns (AddFriendAsyncResponse) {}
+
+  rpc GetFriendAsync(GetFriendAsyncInfo) returns (GetFriendAsyncResponse) {}
 }
 
 // The RegisterInfo message is sent to the server to register a new user.
@@ -45,4 +50,22 @@ message ReceiveMessageInfo {
 message ReceiveMessageResponse { 
   bytes pir_answer = 1; 
   bytes pir_answer_acks = 2;
+}
+
+message AddFriendAsyncInfo {
+  int32 index = 1;
+  string request = 2;
+}
+
+message AddFriendAsyncResponse {
+}
+
+message GetFriendAsyncInfo {
+  int32 start_index = 1;
+  int32 end_index = 2;
+  string authentication_token = 3;
+}
+
+message GetFriendAsyncResponse {
+  repeated string requests = 1;
 }

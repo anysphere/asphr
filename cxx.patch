@@ -27,7 +27,7 @@ index cb40295b..1690535c 100644
                      break;
                  }
              }
-+        } else if attr.path.is_ident("table_name") {
++        } else if attr.path.is_ident("diesel") {
 +            passthrough_attrs.push(attr);
 +            continue;
          } else if attr.path.is_ident("repr") {

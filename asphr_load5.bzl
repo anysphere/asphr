@@ -17,8 +17,8 @@ def load_asphr_repos5(asphr_path):
         lockfile = asphr_path + "//:Cargo.Bazel.lock",
         packages = {
             "diesel": crate.spec(
-                version = "1.4.8",
-                features = ["sqlite"]
+                version = "2.0.0-rc.0",
+                features = ["sqlite", "chrono", "returning_clauses_for_sqlite_3_35"]
             ),
             "chrono": crate.spec(
                 version = "0.4.19",

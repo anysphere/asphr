@@ -1,5 +1,5 @@
 {
-  "checksum": "ec150367abb6a3db91e2572d8bc22456163c9c1ae7dc62fd5ea4d45b8fe531c8",
+  "checksum": "f1096e613f0cb825952f38e6ed0729b38315feabb4389218b7c6f5025604ae44",
   "crates": {
     "autocfg 1.1.0": {
       "name": "autocfg",
@@ -33,43 +33,6 @@
         "version": "1.1.0"
       },
       "license": "Apache-2.0 OR MIT"
-    },
-    "byteorder 1.4.3": {
-      "name": "byteorder",
-      "version": "1.4.3",
-      "repository": {
-        "Http": {
-          "url": "https://crates.io/api/v1/crates/byteorder/1.4.3/download",
-          "sha256": "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
-        }
-      },
-      "targets": [
-        {
-          "Library": {
-            "crate_name": "byteorder",
-            "crate_root": "src/lib.rs",
-            "srcs": {
-              "include": [
-                "**/*.rs"
-              ],
-              "exclude": []
-            }
-          }
-        }
-      ],
-      "library_target_name": "byteorder",
-      "common_attrs": {
-        "compile_data_glob": [
-          "**"
-        ],
-        "crate_features": [
-          "default",
-          "std"
-        ],
-        "edition": "2018",
-        "version": "1.4.3"
-      },
-      "license": "Unlicense OR MIT"
     },
     "chrono 0.4.19": {
       "name": "chrono",
@@ -141,13 +104,13 @@
       },
       "license": "MIT/Apache-2.0"
     },
-    "diesel 1.4.8": {
+    "diesel 2.0.0-rc.0": {
       "name": "diesel",
-      "version": "1.4.8",
+      "version": "2.0.0-rc.0",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/diesel/1.4.8/download",
-          "sha256": "b28135ecf6b7d446b43e27e225622a038cc4e2930a1022f51cdb97ada19b8e4d"
+          "url": "https://crates.io/api/v1/crates/diesel/2.0.0-rc.0/download",
+          "sha256": "e531d0abf8147036383c88ce3785d9cda6fe1b8b1183021ffa01cf49c5819d24"
         }
       },
       "targets": [
@@ -171,45 +134,47 @@
         ],
         "crate_features": [
           "32-column-tables",
+          "chrono",
           "default",
           "libsqlite3-sys",
+          "returning_clauses_for_sqlite_3_35",
           "sqlite",
           "with-deprecated"
         ],
         "deps": {
           "common": [
             {
-              "id": "byteorder 1.4.3",
-              "target": "byteorder"
+              "id": "chrono 0.4.19",
+              "target": "chrono"
             },
             {
-              "id": "libsqlite3-sys 0.22.2",
+              "id": "libsqlite3-sys 0.24.2",
               "target": "libsqlite3_sys"
             }
           ],
           "selects": {}
         },
-        "edition": "2015",
+        "edition": "2018",
         "proc_macro_deps": {
           "common": [
             {
-              "id": "diesel_derives 1.4.1",
+              "id": "diesel_derives 2.0.0-rc.0",
               "target": "diesel_derives"
             }
           ],
           "selects": {}
         },
-        "version": "1.4.8"
+        "version": "2.0.0-rc.0"
       },
       "license": "MIT OR Apache-2.0"
     },
-    "diesel_derives 1.4.1": {
+    "diesel_derives 2.0.0-rc.0": {
       "name": "diesel_derives",
-      "version": "1.4.1",
+      "version": "2.0.0-rc.0",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/diesel_derives/1.4.1/download",
-          "sha256": "45f5098f628d02a7a0f68ddba586fb61e80edec3bdc1be3b921f4ceec60858d3"
+          "url": "https://crates.io/api/v1/crates/diesel_derives/2.0.0-rc.0/download",
+          "sha256": "212ba0cdc611523c37f26c7b3b4aedb4af7cbfe9239c4e7736a8a7c82284d77b"
         }
       },
       "targets": [
@@ -232,11 +197,17 @@
           "**"
         ],
         "crate_features": [
+          "32-column-tables",
           "default",
-          "sqlite"
+          "sqlite",
+          "with-deprecated"
         ],
         "deps": {
           "common": [
+            {
+              "id": "proc-macro-error 1.0.4",
+              "target": "proc_macro_error"
+            },
             {
               "id": "proc-macro2 1.0.39",
               "target": "proc_macro2"
@@ -253,7 +224,7 @@
           "selects": {}
         },
         "edition": "2015",
-        "version": "1.4.1"
+        "version": "2.0.0-rc.0"
       },
       "license": "MIT OR Apache-2.0"
     },
@@ -287,7 +258,7 @@
               "target": "chrono"
             },
             {
-              "id": "diesel 1.4.8",
+              "id": "diesel 2.0.0-rc.0",
               "target": "diesel"
             }
           ],
@@ -361,13 +332,13 @@
       },
       "license": "MIT OR Apache-2.0"
     },
-    "libsqlite3-sys 0.22.2": {
+    "libsqlite3-sys 0.24.2": {
       "name": "libsqlite3-sys",
-      "version": "0.22.2",
+      "version": "0.24.2",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/libsqlite3-sys/0.22.2/download",
-          "sha256": "290b64917f8b0cb885d9de0f9959fe1f775d7fa12f1da2db9001c1c8ab60f89d"
+          "url": "https://crates.io/api/v1/crates/libsqlite3-sys/0.24.2/download",
+          "sha256": "898745e570c7d0453cc1fbc4a701eb6c662ed54e8fec8b7d14be137ebeeb9d14"
         }
       },
       "targets": [
@@ -402,23 +373,23 @@
           "**"
         ],
         "crate_features": [
+          "bundled_bindings",
           "default",
           "min_sqlite_version_3_6_8",
-          "min_sqlite_version_3_7_16",
           "pkg-config",
           "vcpkg"
         ],
         "deps": {
           "common": [
             {
-              "id": "libsqlite3-sys 0.22.2",
+              "id": "libsqlite3-sys 0.24.2",
               "target": "build_script_build"
             }
           ],
           "selects": {}
         },
         "edition": "2018",
-        "version": "0.22.2"
+        "version": "0.24.2"
       },
       "build_script_attrs": {
         "data_glob": [
@@ -429,16 +400,13 @@
             {
               "id": "pkg-config 0.3.25",
               "target": "pkg_config"
+            },
+            {
+              "id": "vcpkg 0.2.15",
+              "target": "vcpkg"
             }
           ],
-          "selects": {
-            "cfg(target_env = \"msvc\")": [
-              {
-                "id": "vcpkg 0.2.15",
-                "target": "vcpkg"
-              }
-            ]
-          }
+          "selects": {}
         },
         "links": "sqlite3"
       },
@@ -617,6 +585,176 @@
       },
       "license": "MIT OR Apache-2.0"
     },
+    "proc-macro-error 1.0.4": {
+      "name": "proc-macro-error",
+      "version": "1.0.4",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/proc-macro-error/1.0.4/download",
+          "sha256": "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "proc_macro_error",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "proc_macro_error",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "default",
+          "syn",
+          "syn-error"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "proc-macro-error 1.0.4",
+              "target": "build_script_build"
+            },
+            {
+              "id": "proc-macro2 1.0.39",
+              "target": "proc_macro2"
+            },
+            {
+              "id": "quote 1.0.18",
+              "target": "quote"
+            },
+            {
+              "id": "syn 1.0.96",
+              "target": "syn"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "proc_macro_deps": {
+          "common": [
+            {
+              "id": "proc-macro-error-attr 1.0.4",
+              "target": "proc_macro_error_attr"
+            }
+          ],
+          "selects": {}
+        },
+        "version": "1.0.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "version_check 0.9.4",
+              "target": "version_check"
+            }
+          ],
+          "selects": {}
+        }
+      },
+      "license": "MIT OR Apache-2.0"
+    },
+    "proc-macro-error-attr 1.0.4": {
+      "name": "proc-macro-error-attr",
+      "version": "1.0.4",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/proc-macro-error-attr/1.0.4/download",
+          "sha256": "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
+        }
+      },
+      "targets": [
+        {
+          "ProcMacro": {
+            "crate_name": "proc_macro_error_attr",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "proc_macro_error_attr",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "proc-macro-error-attr 1.0.4",
+              "target": "build_script_build"
+            },
+            {
+              "id": "proc-macro2 1.0.39",
+              "target": "proc_macro2"
+            },
+            {
+              "id": "quote 1.0.18",
+              "target": "quote"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "1.0.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "version_check 0.9.4",
+              "target": "version_check"
+            }
+          ],
+          "selects": {}
+        }
+      },
+      "license": "MIT OR Apache-2.0"
+    },
     "proc-macro2 1.0.39": {
       "name": "proc-macro2",
       "version": "1.0.39",
@@ -775,7 +913,6 @@
           "default",
           "derive",
           "fold",
-          "full",
           "parsing",
           "printing",
           "proc-macro",
@@ -930,6 +1067,39 @@
         ],
         "edition": "2015",
         "version": "0.2.15"
+      },
+      "license": "MIT/Apache-2.0"
+    },
+    "version_check 0.9.4": {
+      "name": "version_check",
+      "version": "0.9.4",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/version_check/0.9.4/download",
+          "sha256": "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "version_check",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "version_check",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2015",
+        "version": "0.9.4"
       },
       "license": "MIT/Apache-2.0"
     },
@@ -1175,10 +1345,6 @@
     "direct-cargo-bazel-deps 0.0.1": ""
   },
   "conditions": {
-    "cfg(target_env = \"msvc\")": [
-      "i686-pc-windows-msvc",
-      "x86_64-pc-windows-msvc"
-    ],
     "cfg(target_os = \"wasi\")": [
       "wasm32-wasi"
     ],

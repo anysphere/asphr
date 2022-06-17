@@ -1,5 +1,5 @@
 diff --git a/syntax/attrs.rs b/syntax/attrs.rs
-index cb40295b..57e79b7b 100644
+index cb40295b..1690535c 100644
 --- a/syntax/attrs.rs
 +++ b/syntax/attrs.rs
 @@ -65,9 +65,17 @@ pub fn parse(cx: &mut Errors, attrs: Vec<Attribute>, mut parser: Parser) -> Othe
@@ -23,7 +23,17 @@ index cb40295b..57e79b7b 100644
                          continue;
                      }
                  }
-@@ -208,10 +216,11 @@ fn parse_doc_attribute(input: ParseStream) -> Result<DocAttribute> {
+@@ -76,6 +84,9 @@ pub fn parse(cx: &mut Errors, attrs: Vec<Attribute>, mut parser: Parser) -> Othe
+                     break;
+                 }
+             }
++        } else if attr.path.is_ident("table_name") {
++            passthrough_attrs.push(attr);
++            continue;
+         } else if attr.path.is_ident("repr") {
+             match attr.parse_args_with(parse_repr_attribute) {
+                 Ok(attr) => {
+@@ -208,10 +219,11 @@ fn parse_doc_attribute(input: ParseStream) -> Result<DocAttribute> {
      }
  }
  
@@ -36,7 +46,7 @@ index cb40295b..57e79b7b 100644
      for path in paths {
          if let Some(ident) = path.get_ident() {
              if let Some(derive) = Derive::from(ident) {
-@@ -219,9 +228,9 @@ fn parse_derive_attribute(cx: &mut Errors, input: ParseStream) -> Result<Vec<Der
+@@ -219,9 +231,9 @@ fn parse_derive_attribute(cx: &mut Errors, input: ParseStream) -> Result<Vec<Der
                  continue;
              }
          }

@@ -87,6 +87,7 @@ message RemoveFriendRequest {
 message RemoveFriendResponse {}
 
 message SendFriendRequestAsyncRequest {
+    //TODO: these first three parameters will be coalesced into a single BIG KEY.
     string friend_request_public_key = 1;
     string kx_public_key = 2;
     int32 allocation = 3;

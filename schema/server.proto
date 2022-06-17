@@ -17,7 +17,7 @@ service Server {
   // Making Friends protobufs
   rpc AddFriendAsync(AddFriendAsyncInfo) returns (AddFriendAsyncResponse) {}
 
-  rpc GetFriendAsync(GetFriendAsyncInfo) returns (GetFriendAsyncResponse) {}
+  rpc GetAsyncFriendRequests(GetAsyncFriendRequestsInfo) returns (GetAsyncFriendRequestsResponse) {}
 }
 
 // The RegisterInfo message is sent to the server to register a new user.
@@ -55,17 +55,17 @@ message ReceiveMessageResponse {
 message AddFriendAsyncInfo {
   int32 index = 1;
   string request = 2;
+  string authentication_token = 3;
 }
 
 message AddFriendAsyncResponse {
 }
 
-message GetFriendAsyncInfo {
+message GetAsyncFriendRequestsInfo {
   int32 start_index = 1;
   int32 end_index = 2;
-  string authentication_token = 3;
 }
 
-message GetFriendAsyncResponse {
+message GetAsyncFriendRequestsResponse {
   repeated string requests = 1;
 }

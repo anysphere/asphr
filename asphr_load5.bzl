@@ -18,17 +18,21 @@ def load_asphr_repos5(asphr_path):
         packages = {
             "diesel": crate.spec(
                 version = "2.0.0-rc.0",
-                features = ["sqlite", "chrono", "returning_clauses_for_sqlite_3_35"]
+                features = ["sqlite", "chrono", "returning_clauses_for_sqlite_3_35"],
             ),
             "chrono": crate.spec(
                 version = "0.4.19",
+            ),
+            "diesel_migrations": crate.spec(
+                version = "2.0.0-rc.0",
+                features = ["sqlite"],
             ),
         },
         # Setting the default package name to `""` forces the use of the macros defined in this repository
         # to always use the root package when looking for dependencies or aliases. This should be considered
         # optional as the repository also exposes aliases for easy access to all dependencies.
         render_config = render_config(
-            default_package_name = ""
+            default_package_name = "",
         ),
     )
 

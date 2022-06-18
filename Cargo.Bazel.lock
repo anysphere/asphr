@@ -1,5 +1,5 @@
 {
-  "checksum": "cd37f256dea20816980b062281ee0c69e2e02e86deb68d275077ef7158098c86",
+  "checksum": "249c9333239f2d464067dfae042a3cd79dcd9f479bfa0dce427696beb3257592",
   "crates": {
     "autocfg 1.1.0": {
       "name": "autocfg",
@@ -33,6 +33,39 @@
         "version": "1.1.0"
       },
       "license": "Apache-2.0 OR MIT"
+    },
+    "cfg-if 1.0.0": {
+      "name": "cfg-if",
+      "version": "1.0.0",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/cfg-if/1.0.0/download",
+          "sha256": "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "cfg_if",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "cfg_if",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "1.0.0"
+      },
+      "license": "MIT/Apache-2.0"
     },
     "chrono 0.4.19": {
       "name": "chrono",
@@ -323,6 +356,10 @@
             {
               "id": "diesel_migrations 2.0.0-rc.0",
               "target": "diesel_migrations"
+            },
+            {
+              "id": "rand 0.8.5",
+              "target": "rand"
             }
           ],
           "selects": {}
@@ -331,6 +368,64 @@
         "version": "0.0.1"
       },
       "license": null
+    },
+    "getrandom 0.2.7": {
+      "name": "getrandom",
+      "version": "0.2.7",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/getrandom/0.2.7/download",
+          "sha256": "4eb1a864a501629691edf6c15a593b7a51eebaa1e8468e9ddc623de7c9b58ec6"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "getrandom",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "getrandom",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "std"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "cfg-if 1.0.0",
+              "target": "cfg_if"
+            }
+          ],
+          "selects": {
+            "cfg(target_os = \"wasi\")": [
+              {
+                "id": "wasi 0.11.0+wasi-snapshot-preview1",
+                "target": "wasi"
+              }
+            ],
+            "cfg(unix)": [
+              {
+                "id": "libc 0.2.126",
+                "target": "libc"
+              }
+            ]
+          }
+        },
+        "edition": "2018",
+        "version": "0.2.7"
+      },
+      "license": "MIT OR Apache-2.0"
     },
     "libc 0.2.126": {
       "name": "libc",
@@ -747,6 +842,43 @@
       },
       "license": "MIT OR Apache-2.0"
     },
+    "ppv-lite86 0.2.16": {
+      "name": "ppv-lite86",
+      "version": "0.2.16",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/ppv-lite86/0.2.16/download",
+          "sha256": "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "ppv_lite86",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "ppv_lite86",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "simd",
+          "std"
+        ],
+        "edition": "2018",
+        "version": "0.2.16"
+      },
+      "license": "MIT/Apache-2.0"
+    },
     "proc-macro-error 1.0.4": {
       "name": "proc-macro-error",
       "version": "1.0.4",
@@ -1027,6 +1159,164 @@
         },
         "edition": "2018",
         "version": "1.0.18"
+      },
+      "license": "MIT OR Apache-2.0"
+    },
+    "rand 0.8.5": {
+      "name": "rand",
+      "version": "0.8.5",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/rand/0.8.5/download",
+          "sha256": "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rand",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "rand",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "alloc",
+          "default",
+          "getrandom",
+          "libc",
+          "rand_chacha",
+          "std",
+          "std_rng"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "rand_chacha 0.3.1",
+              "target": "rand_chacha"
+            },
+            {
+              "id": "rand_core 0.6.3",
+              "target": "rand_core"
+            }
+          ],
+          "selects": {
+            "cfg(unix)": [
+              {
+                "id": "libc 0.2.126",
+                "target": "libc"
+              }
+            ]
+          }
+        },
+        "edition": "2018",
+        "version": "0.8.5"
+      },
+      "license": "MIT OR Apache-2.0"
+    },
+    "rand_chacha 0.3.1": {
+      "name": "rand_chacha",
+      "version": "0.3.1",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/rand_chacha/0.3.1/download",
+          "sha256": "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rand_chacha",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "rand_chacha",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "std"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "ppv-lite86 0.2.16",
+              "target": "ppv_lite86"
+            },
+            {
+              "id": "rand_core 0.6.3",
+              "target": "rand_core"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.3.1"
+      },
+      "license": "MIT OR Apache-2.0"
+    },
+    "rand_core 0.6.3": {
+      "name": "rand_core",
+      "version": "0.6.3",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/rand_core/0.6.3/download",
+          "sha256": "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rand_core",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "rand_core",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "alloc",
+          "getrandom",
+          "std"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "getrandom 0.2.7",
+              "target": "getrandom"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.6.3"
       },
       "license": "MIT OR Apache-2.0"
     },
@@ -1495,6 +1785,43 @@
       },
       "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT"
     },
+    "wasi 0.11.0+wasi-snapshot-preview1": {
+      "name": "wasi",
+      "version": "0.11.0+wasi-snapshot-preview1",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/wasi/0.11.0+wasi-snapshot-preview1/download",
+          "sha256": "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "wasi",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "wasi",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": [
+          "default",
+          "std"
+        ],
+        "edition": "2018",
+        "version": "0.11.0+wasi-snapshot-preview1"
+      },
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT"
+    },
     "winapi 0.3.9": {
       "name": "winapi",
       "version": "0.3.9",
@@ -1702,6 +2029,27 @@
   "conditions": {
     "cfg(target_os = \"wasi\")": [
       "wasm32-wasi"
+    ],
+    "cfg(unix)": [
+      "aarch64-apple-darwin",
+      "aarch64-apple-ios",
+      "aarch64-apple-ios-sim",
+      "aarch64-linux-android",
+      "aarch64-unknown-linux-gnu",
+      "arm-unknown-linux-gnueabi",
+      "armv7-linux-androideabi",
+      "armv7-unknown-linux-gnueabi",
+      "i686-apple-darwin",
+      "i686-linux-android",
+      "i686-unknown-freebsd",
+      "i686-unknown-linux-gnu",
+      "powerpc-unknown-linux-gnu",
+      "s390x-unknown-linux-gnu",
+      "x86_64-apple-darwin",
+      "x86_64-apple-ios",
+      "x86_64-linux-android",
+      "x86_64-unknown-freebsd",
+      "x86_64-unknown-linux-gnu"
     ],
     "cfg(windows)": [
       "i686-pc-windows-msvc",

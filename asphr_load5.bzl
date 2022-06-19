@@ -27,10 +27,6 @@ def load_asphr_repos5(asphr_path):
             "rand": crate.spec(
                 version = "0.8.5",
             ),
-            "clap": crate.spec(
-                version = "3.2.5",
-                default_features=False,
-            )
         },
         # Setting the default package name to `""` forces the use of the macros defined in this repository
         # to always use the root package when looking for dependencies or aliases. This should be considered

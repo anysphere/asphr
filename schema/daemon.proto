@@ -98,22 +98,23 @@ message BaseMessage {
     // in particular, this ID is guaranteed to be unique among ALL messages (on a given device), whereas the ID in message.proto
     // is only unique for each <sender, recipient> pair.
     // the format of this ID is something like (to|from):sender:sequence_number
-    string id = 1;
+    int32 id = 1;
     string message = 2;
+    string unique_name = 3;
+    string display_name = 4;
 }
 
 message IncomingMessage {
     BaseMessage m = 1;
-    string from = 2;
-    google.protobuf.Timestamp received_timestamp = 3;
-    bool seen = 4;
+    google.protobuf.Timestamp received_timestamp = 2;
+    bool seen = 3;
+    bool delivered = 4;
 }
 
 message OutgoingMessage {
     BaseMessage m = 1;
-    string to = 2;
-    google.protobuf.Timestamp written_timestamp = 3;
-    bool delivered = 4;
+    google.protobuf.Timestamp written_timestamp = 2;
+    bool delivered = 3;
 }
 
 message GetMessagesRequest {

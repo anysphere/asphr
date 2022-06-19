@@ -106,15 +106,16 @@ message BaseMessage {
 
 message IncomingMessage {
     BaseMessage m = 1;
-    google.protobuf.Timestamp received_timestamp = 2;
+    google.protobuf.Timestamp delivered_at = 2;
     bool seen = 3;
     bool delivered = 4;
 }
 
 message OutgoingMessage {
     BaseMessage m = 1;
-    google.protobuf.Timestamp written_timestamp = 2;
+    google.protobuf.Timestamp sent_at = 2;
     bool delivered = 3;
+    google.protobuf.Timestamp delivered_at = 4;
 }
 
 message GetMessagesRequest {
@@ -142,7 +143,7 @@ message GetSentMessagesResponse {
 }
 
 message MessageSeenRequest {
-    string id = 1;
+    int32 id = 1;
 }
 
 message MessageSeenResponse {}
@@ -153,6 +154,7 @@ message GetStatusResponse {
     bool registered = 1;
     string release_hash = 2;
     int32 latency_seconds = 3;
+    string server_address = 4;
 }
 
 message GetLatencyRequest {}

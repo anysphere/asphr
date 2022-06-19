@@ -55,8 +55,9 @@ message RegisterUserResponse {}
 message GetFriendListRequest {}
 
 message FriendInfo {
-    string name = 1;
-    bool enabled = 2;
+    string unique_name = 1;
+    string display_name = 2;
+    bool enabled = 3;
 }
 
 message GetFriendListResponse {
@@ -64,7 +65,8 @@ message GetFriendListResponse {
 }
 
 message GenerateFriendKeyRequest {
-    string name = 1;
+    string unique_name = 1;
+    string display_name = 2;
 }
 
 message GenerateFriendKeyResponse {

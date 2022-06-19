@@ -18,17 +18,14 @@ def load_asphr_repos5(asphr_path):
         packages = {
             "diesel": crate.spec(
                 version = "2.0.0-rc.0",
-                features = ["sqlite", "chrono", "returning_clauses_for_sqlite_3_35"],
-            ),
-            "chrono": crate.spec(
-                version = "0.4.19",
+                features = ["sqlite", "returning_clauses_for_sqlite_3_35"],
             ),
             "diesel_migrations": crate.spec(
                 version = "2.0.0-rc.0",
                 features = ["sqlite"],
             ),
             "rand": crate.spec(
-              version = "0.8.5",
+                version = "0.8.5",
             ),
         },
         # Setting the default package name to `""` forces the use of the macros defined in this repository

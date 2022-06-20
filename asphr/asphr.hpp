@@ -78,7 +78,7 @@ constexpr size_t MESSAGE_SIZE_BITS = MESSAGE_SIZE * 8;
 
 // this could be decreased to improve traffic
 // since this just have to be large enough to hold the largest async request
-constexpr size_t ASYNC_FRIEND_REQUEST_SIZE = MESSAGE_SIZE;
+constexpr size_t ASYNC_FRIEND_REQUEST_SIZE = MESSAGE_SIZE;  // plaintext size
 
 // pir_value is the type of the value stored at one index in the database
 using pir_value_t = array<byte, MESSAGE_SIZE>;

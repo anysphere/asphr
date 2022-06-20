@@ -54,7 +54,7 @@ message ReceiveMessageResponse {
 
 message AddFriendAsyncInfo {
   int32 index = 1;
-  string request = 2;
+  bytes request = 2;
   string authentication_token = 3;
 }
 
@@ -67,5 +67,5 @@ message GetAsyncFriendRequestsInfo {
 }
 
 message GetAsyncFriendRequestsResponse {
-  repeated string requests = 1;
+  repeated bytes requests = 1;
 }

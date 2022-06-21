@@ -80,6 +80,10 @@ constexpr size_t MESSAGE_SIZE_BITS = MESSAGE_SIZE * 8;
 // since this just have to be large enough to hold the largest async request
 constexpr size_t ASYNC_FRIEND_REQUEST_SIZE = MESSAGE_SIZE;  // plaintext size
 
+// setups related to async friend requests
+// how many requests to crawl at one round
+const size_t ASYNC_FRIEND_REQUEST_BATCH_SIZE = 1000;
+
 // pir_value is the type of the value stored at one index in the database
 using pir_value_t = array<byte, MESSAGE_SIZE>;
 // pir_index is the type of the index in the database. this should correspond to

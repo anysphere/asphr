@@ -24,6 +24,7 @@ service Server {
 message RegisterInfo { 
   bytes public_key = 1;
   string beta_key = 2;
+  bytes friend_request_public_key = 3;
 }
 
 // RegisterResponse is a response to a RegisterInfo request.
@@ -68,4 +69,5 @@ message GetAsyncFriendRequestsInfo {
 
 message GetAsyncFriendRequestsResponse {
   repeated bytes requests = 1;
+  repeated bytes friend_request_public_key = 2;
 }

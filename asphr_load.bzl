@@ -9,8 +9,6 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 RUST_VERSION = "1.61.0"
 
-
-
 def load_asphr_repos(asphr_path):
     """Loads the repositories for the asphr project.
 
@@ -70,7 +68,6 @@ def load_asphr_repos(asphr_path):
 
     http_archive(
         name = "com_github_gperftools_gperftools",
-        # build_file_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])""",
         build_file = asphr_path + "//:gperftools.BUILD",
         patch_args = ["-p1"],
         patches = [asphr_path + "//:gperftools.patch"], # random_shuffle not supported by c++20
@@ -92,13 +89,6 @@ def load_asphr_repos(asphr_path):
         url = "https://github.com/bazelbuild/rules_foreign_cc/archive/ae4ff42901354e2da8285dac4be8329eea2ea96a.tar.gz",  # v 0.7.1
         patch_args = ["-p1"],
         patches = [asphr_path + "//:rules_foreign_cc.0.7.1.patch"],  # from https://github.com/bazelbuild/rules_foreign_cc/issues/859#issuecomment-1058361769
-    )
-
-    http_archive(
-        name = "rules_foreign_cc_airbnb",
-        urls = ["https://github.com/bazelbuild/rules_foreign_cc/archive/8648b0446092ef2a34d45b02c8dc4c35c3a8df79.tar.gz"],
-        sha256 = "e1b67e1fda647c7713baac11752573bfd4c2d45ef09afb4d4de9eb9bd4e5ac76",
-        strip_prefix = "rules_foreign_cc-8648b0446092ef2a34d45b02c8dc4c35c3a8df79",
     )
 
     _RULES_BOOST_COMMIT = "ef58870fe00ecb8047cd34324b8c21221387d5fc"

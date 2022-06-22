@@ -10,9 +10,6 @@ cc_library(
     ],
     linkstatic = True,
     visibility = ["//visibility:public"],
-    linkopts = [
-        # "-lprofiler"
-    ],
     deps = [
         ":assert",
         ":utils",
@@ -24,7 +21,6 @@ cc_library(
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
-        # "@com_github_gperftools_gperftools//:gperftools",
     ],
 )
 

@@ -44,30 +44,3 @@ def load_asphr_repos2():
     rust_register_toolchains(version = RUST_VERSION, edition="2021")
 
     rust_analyzer_deps()
-
-    configure_make(
-        name = "gperftools_build",
-        configure_options = [
-            "--enable-shared=no",
-            "--enable-frame-pointers",
-            "--disable-libunwind",
-        ],
-        lib_source = "@com_github_gperftools_gperftools//:all",
-        linkopts = ["-lpthread"],
-        make_commands = ["make install-libLTLIBRARIES install-perftoolsincludeHEADERS"],
-        static_libraries = select({
-            "//bazel:debug_tcmalloc": ["libtcmalloc_debug.a"],
-            "//conditions:default": ["libtcmalloc_and_profiler.a"],
-        }),
-    )
-
-    # Workaround for https://github.com/bazelbuild/rules_foreign_cc/issues/227
-    cc_library(
-        name = "gperftools",
-        deps = [
-            "gperftools_build",
-        ],
-    )
-
-
-

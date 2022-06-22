@@ -14,7 +14,6 @@ load("@com_grail_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 load("@rules_rust//tools/rust_analyzer:deps.bzl", "rust_analyzer_deps")
-load("@rules_foreign_cc_airbnb//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
 load(":asphr_load.bzl", "RUST_VERSION")
 
 
@@ -44,7 +43,4 @@ def load_asphr_repos2():
     rust_register_toolchains(version = RUST_VERSION, edition="2021")
 
     rust_analyzer_deps()
-
-    rules_foreign_cc_dependencies()
-
     

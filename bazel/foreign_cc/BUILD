@@ -1,4 +1,4 @@
-load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
+load("@rules_foreign_cc_airbnb//tools/build_defs:configure.bzl", "configure_make")
 
 configure_make(
     name = "gperftools_build",

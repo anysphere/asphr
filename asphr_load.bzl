@@ -100,6 +100,13 @@ def load_asphr_repos(asphr_path):
         patches = [asphr_path + "//:rules_foreign_cc.0.7.1.patch"],  # from https://github.com/bazelbuild/rules_foreign_cc/issues/859#issuecomment-1058361769
     )
 
+    http_archive(
+        name = "rules_foreign_cc_airbnb",
+        urls = ["https://github.com/bazelbuild/rules_foreign_cc/archive/8648b0446092ef2a34d45b02c8dc4c35c3a8df79.tar.gz"],
+        sha256 = "e1b67e1fda647c7713baac11752573bfd4c2d45ef09afb4d4de9eb9bd4e5ac76",
+        strip_prefix = "rules_foreign_cc-8648b0446092ef2a34d45b02c8dc4c35c3a8df79",
+    )
+
     _RULES_BOOST_COMMIT = "ef58870fe00ecb8047cd34324b8c21221387d5fc"
 
     http_archive(

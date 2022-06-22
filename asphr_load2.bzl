@@ -14,6 +14,7 @@ load("@com_grail_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 load("@rules_rust//tools/rust_analyzer:deps.bzl", "rust_analyzer_deps")
+load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
 load(":asphr_load.bzl", "RUST_VERSION")
 
 
@@ -43,5 +44,30 @@ def load_asphr_repos2():
     rust_register_toolchains(version = RUST_VERSION, edition="2021")
 
     rust_analyzer_deps()
+
+    configure_make(
+        name = "gperftools_build",
+        configure_options = [
+            "--enable-shared=no",
+            "--enable-frame-pointers",
+            "--disable-libunwind",
+        ],
+        lib_source = "@com_github_gperftools_gperftools//:all",
+        linkopts = ["-lpthread"],
+        make_commands = ["make install-libLTLIBRARIES install-perftoolsincludeHEADERS"],
+        static_libraries = select({
+            "//bazel:debug_tcmalloc": ["libtcmalloc_debug.a"],
+            "//conditions:default": ["libtcmalloc_and_profiler.a"],
+        }),
+    )
+
+    # Workaround for https://github.com/bazelbuild/rules_foreign_cc/issues/227
+    cc_library(
+        name = "gperftools",
+        deps = [
+            "gperftools_build",
+        ],
+    )
+
 
 

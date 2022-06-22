@@ -1,5 +1,5 @@
-load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -14,17 +14,20 @@ filegroup(
 # TODO: currently requires autoconf: `sudo apt install autoconf`. Make it independant of that.
 configure_make(
     name = "gperftools_build",
+    args = [
+        "install-libLTLIBRARIES",
+        "install-perftoolsincludeHEADERS",
+    ],  # the list of arguments passed to the make commands.
+    # autogen = True,
+    autoreconf = True,
+    configure_in_place = True,
     configure_options = [
         "--enable-shared=no",
         "--enable-frame-pointers",
         "--disable-libunwind",
     ],
-    configure_in_place = True,
-    # autogen = True,
-    autoreconf = True,
     lib_source = ":all_srcs",
     linkopts = ["-lpthread"],
-    args = ["install-libLTLIBRARIES", "install-perftoolsincludeHEADERS"], # the list of arguments passed to the make commands.
     out_static_libs = select({
         # "//bazel:debug_tcmalloc": ["libtcmalloc_debug.a"],
         "//conditions:default": ["libtcmalloc_and_profiler.a"],

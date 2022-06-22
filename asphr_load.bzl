@@ -11,21 +11,6 @@ RUST_VERSION = "1.61.0"
 
 
 
-def _com_github_gperftools_gperftools():
-    http_archive(
-        name = "com_github_gperftools_gperftools",
-        build_file_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])""",
-        patch_cmds = ["./autogen.sh"],
-        sha256 = "18574813a062eee487bc1b761e8024a346075a7cb93da19607af362dc09565ef",
-        strip_prefix = "gperftools-fc00474ddc21fff618fc3f009b46590e241e425e",
-        urls = ["https://github.com/gperftools/gperftools/archive/fc00474ddc21fff618fc3f009b46590e241e425e.tar.gz"],
-    )
-
-    native.bind(
-        name = "gperftools",
-        actual = "@asphr//bazel/foreign_cc:gperftools",
-    )
-
 def load_asphr_repos(asphr_path):
     """Loads the repositories for the asphr project.
 
@@ -83,7 +68,16 @@ def load_asphr_repos(asphr_path):
         urls = ["https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip"],
     )
 
-    _com_github_gperftools_gperftools()
+    http_archive(
+        name = "com_github_gperftools_gperftools",
+        # build_file_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])""",
+        build_file = asphr_path + "//:gperftools.BUILD",
+        patch_args = ["-p1"],
+        patches = [asphr_path + "//:gperftools.patch"], # random_shuffle not supported by c++20
+        sha256 = "83e3bfdd28b8bcf53222c3798d4d395d52dadbbae59e8730c4a6d31a9c3732d8",
+        strip_prefix = "gperftools-2.10",
+        urls = ["https://github.com/gperftools/gperftools/releases/download/gperftools-2.10/gperftools-2.10.tar.gz"],
+    )
 
     http_archive(
         name = "rules_cc",

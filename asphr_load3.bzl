@@ -14,5 +14,8 @@ def load_asphr_repos3():
 
     crate_universe_dependencies()
 
-    rules_foreign_cc_dependencies()
+    rules_foreign_cc_dependencies(
+        register_built_tools = True,
+    )
+
 

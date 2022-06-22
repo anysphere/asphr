@@ -28,9 +28,8 @@ def load_asphr_repos2():
 
     rules_proto_grpc_js_repos()
 
-    rules_foreign_cc_dependencies(
-        register_built_tools = True,
-    )
+    rules_foreign_cc_dependencies()
+
 
     rules_proto_dependencies()
 

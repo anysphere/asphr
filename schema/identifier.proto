@@ -19,11 +19,16 @@ package asphrclient;
 //
 // The string-based public ID takes the following format:
 //
-//      [public-id] = base58(bytes(PublicID) || checksum(bytes(PublicID)))
+//      [public-id] = # base58(bytes(PublicID) || checksum(bytes(PublicID)))
 //
 // In public, it is always displayed in link format:
 //
-//      [public-id-link] = anysphere.id/#[public-id]
+//      [public-id-link] = anysphere.id/[public-id]
+//
+// The identifier starts with a # because when put in a link, we don't want to send it to the server,
+// and # signifies the start of a URI fragment which is never sent to the server (see https://wormhole.app/security for inspiration). 
+//
+// Implementation: client/daemon/identifier
 //
 message PublicID {
     // index is the database index of the person.
@@ -35,4 +40,10 @@ message PublicID {
     bytes friend_request_public_key = 2;
     // the key-exchange public key, used for adding a friend in the two-way situation.
     bytes kx_public_key = 3;
+    // whether the friend request should be sent instantly or not
+    // this should only be true if this person guarantees to not send friend requests
+    // at the same time as the other person.
+    // it should also only be true if this person monitors the friend requests often,
+    // which few accounts will do (and there will probably be an associated cost with doing so)
+    // bool instant_friend_requests = 4; // TODO: when we implement the instant friend request, add this in
 }

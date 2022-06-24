@@ -22,7 +22,7 @@ service Daemon {
 
     rpc AddSyncFriend(AddSyncFriendRequest) returns (AddSyncFriendResponse) {}
 
-    rpc SendAysncFriendRequest(SendAsyncFriendRequestRequest) returns (SendAsyncFriendRequestResponse) {}
+    rpc SendAsyncFriendRequest(SendAsyncFriendRequestRequest) returns (SendAsyncFriendRequestResponse) {}
 
     rpc GetOutgoingAsyncFriendRequests(GetOutgoingAsyncFriendRequestsRequest) returns (GetOutgoingAsyncFriendRequestsResponse) {}
 

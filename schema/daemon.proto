@@ -91,7 +91,7 @@ message GetPublicIDResponse {
 message AddSyncFriendRequest {
     string unique_name = 1;
     string display_name = 2;
-    string story = 3;
+    string story = 3; // this is the story representing the public identifier
 }
 
 message AddSyncFriendResponse {}

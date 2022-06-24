@@ -89,7 +89,9 @@ message GetPublicIDResponse {
 }
 
 message AddSyncFriendRequest {
-    FriendInfo friend_info = 1;
+    string unique_name = 1;
+    string display_name = 2;
+    string story = 3;
 }
 
 message AddSyncFriendResponse {}

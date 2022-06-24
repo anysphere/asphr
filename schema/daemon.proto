@@ -18,9 +18,17 @@ service Daemon {
 
     rpc GetFriendList(GetFriendListRequest) returns (GetFriendListResponse) {}
 
-    rpc GenerateFriendKey(GenerateFriendKeyRequest) returns (GenerateFriendKeyResponse) {}
+    rpc GetPublicID(GetPublicIDRequest) returns (GetPublicIDResponse) {}
 
-    rpc AddFriend(AddFriendRequest) returns (AddFriendResponse) {}
+    rpc AddSyncFriend(AddSyncFriendRequest) returns (AddSyncFriendResponse) {}
+
+    rpc SendAysncFriendRequest(SendAsyncFriendRequestRequest) returns (SendAsyncFriendRequestResponse) {}
+
+    rpc GetOutgoingAsyncFriendRequests(GetOutgoingAsyncFriendRequestsRequest) returns (GetOutgoingAsyncFriendRequestsResponse) {}
+
+    rpc GetIncomingAsyncFriendRequests(GetIncomingAsyncFriendRequestsRequest) returns (GetIncomingAsyncFriendRequestsResponse) {}
+
+    rpc DecideAsyncFriendRequest(DecideAsyncFriendRequestRequest) returns (DecideAsyncFriendRequestResponse) {}
 
     rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {}
 
@@ -57,7 +65,8 @@ message GetFriendListRequest {}
 message FriendInfo {
     string unique_name = 1;
     string display_name = 2;
-    bool enabled = 3;
+    string public_id = 3;
+    int32 progress = 4;
 }
 
 message GetFriendListResponse {
@@ -73,12 +82,45 @@ message GenerateFriendKeyResponse {
     string key = 1;
 }
 
-message AddFriendRequest {
-    string unique_name = 1;
-    string key = 2;
+message GetPublicIDRequest {}
+
+message GetPublicIDResponse {
+    string public_id = 1;
 }
 
-message AddFriendResponse {}
+message AddSyncFriendRequest {
+    FriendInfo friend_info = 1;
+}
+
+message AddSyncFriendResponse {}
+
+message SendAsyncFriendRequestRequest {
+    FriendInfo friend_info = 1;
+    string message = 2;
+}
+
+message SendAsyncFriendRequestResponse {}
+
+message GetOutgoingAsyncFriendRequestsRequest {}
+
+message GetOutgoingAsyncFriendRequestsResponse {
+    repeated FriendInfo friend_infos = 1;
+    repeated string messages = 2;
+}
+
+message GetIncomingAsyncFriendRequestsRequest {}
+
+message GetIncomingAsyncFriendRequestsResponse {
+    repeated FriendInfo friend_infos = 1;
+    repeated string messages = 2;
+}
+
+message DecideAsyncFriendRequestRequest {
+    string unique_name = 1;
+    bool accept = 2;
+}
+
+message DecideAsyncFriendRequestResponse {}
 
 message RemoveFriendRequest {
     string unique_name = 1;

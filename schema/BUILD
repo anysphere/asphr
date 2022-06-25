@@ -42,6 +42,16 @@ cc_proto_library(
 )
 
 proto_library(
+    name = "identifier_proto",
+    srcs = ["identifier.proto"],
+)
+
+cc_proto_library(
+    name = "identifier_proto_cc",
+    deps = [":identifier_proto"],
+)
+
+proto_library(
     name = "daemon_proto",
     srcs = ["daemon.proto"],
     deps = ["@com_google_protobuf//:timestamp_proto"],

@@ -27,6 +27,8 @@ message Message {
     // this requires some careful thought with dummy messages.
     uint32 sequence_number = 1;
     // msg contains the actual UTF-8 message, if such a message exists
+    // In the future, we probably want this to be `bytes`, encoding a protobuf. The protobuf
+    // will contain a string message and possibly other information, like pictures or reply metadata.
     string msg = 2; 
     // if the message is a long message, this field contains the number of parts it has
     // this field is not set if the message isn't long.

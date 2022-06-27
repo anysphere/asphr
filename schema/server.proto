@@ -22,7 +22,7 @@ service Server {
 
 // The RegisterInfo message is sent to the server to register a new user.
 message RegisterInfo { 
-  bytes public_key = 1;
+  bytes friend_request_public_key = 1;
   string beta_key = 2;
 }
 

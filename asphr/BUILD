@@ -10,7 +10,6 @@ cc_library(
     srcs = [
         "asphr.hpp",
     ],
-    linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [
         ":assert",
@@ -34,7 +33,6 @@ cc_library(
     hdrs = [
         "utils.hpp",
     ],
-    linkstatic = True,
     deps = [],
 )
 
@@ -42,7 +40,6 @@ cc_test(
     name = "utils_test",
     size = "small",
     srcs = ["utils_test.cc"],
-    linkstatic = True,
     deps = [
         ":utils",
         "@com_google_googletest//:gtest_main",
@@ -54,7 +51,6 @@ cc_library(
     hdrs = [
         "assert.hpp",
     ],
-    linkstatic = True,
     deps = select({
         ":opt_build": [],
         "//conditions:default": ["@boost//:stacktrace"],
@@ -64,7 +60,6 @@ cc_library(
 cc_binary(
     name = "assert_manual_test",
     srcs = ["assert_manual_test.cc"],
-    linkstatic = True,
     deps = [
         ":assert",
     ],
@@ -84,7 +79,6 @@ cc_library(
         ":log_level_warn": ["ASPHR_LOGLEVEL_WARN"],
         "//conditions:default": [],
     }),
-    linkstatic = True,
     deps = [
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
@@ -94,7 +88,6 @@ cc_library(
 cc_binary(
     name = "log_manual_test",
     srcs = ["log_manual_test.cc"],
-    linkstatic = True,
     deps = [
         ":log",
     ],

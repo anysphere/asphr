@@ -42,6 +42,7 @@ message Message {
     // 
     // true iff this message is a control message
     bool control = 5;
+    // keep this in sync with db.rs, ControlMessage constants
     enum ControlMessage {
         OUTGOING_FRIEND_REQUEST = 0;
     }

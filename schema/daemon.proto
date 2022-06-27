@@ -73,15 +73,6 @@ message GetFriendListResponse {
     repeated FriendInfo friend_infos = 1;
 }
 
-message GenerateFriendKeyRequest {
-    string unique_name = 1;
-    string display_name = 2;
-}
-
-message GenerateFriendKeyResponse {
-    string key = 1;
-}
-
 message GetPublicIDRequest {}
 
 message GetPublicIDResponse {

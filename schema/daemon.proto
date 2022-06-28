@@ -100,11 +100,6 @@ message GetOutgoingFriendRequestsRequest {}
 message GetOutgoingFriendRequestsResponse {
     repeated FriendInfo friend_infos = 1;
     repeated string messages = 2;
-    enum FriendRequestType {
-        ASYNC = 0;
-        SYNC = 1;
-    }
-    repeated FriendRequestType friend_request_types = 3;
 }
 
 message GetIncomingAsyncFriendRequestsRequest {}

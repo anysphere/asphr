@@ -24,7 +24,7 @@ service Daemon {
 
     rpc SendAsyncFriendRequest(SendAsyncFriendRequestRequest) returns (SendAsyncFriendRequestResponse) {}
 
-    rpc GetOutgoingAsyncFriendRequests(GetOutgoingAsyncFriendRequestsRequest) returns (GetOutgoingAsyncFriendRequestsResponse) {}
+    rpc GetOutgoingFriendRequests(GetOutgoingFriendRequestsRequest) returns (GetOutgoingFriendRequestsResponse) {}
 
     rpc GetIncomingAsyncFriendRequests(GetIncomingAsyncFriendRequestsRequest) returns (GetIncomingAsyncFriendRequestsResponse) {}
 
@@ -95,11 +95,16 @@ message SendAsyncFriendRequestRequest {
 
 message SendAsyncFriendRequestResponse {}
 
-message GetOutgoingAsyncFriendRequestsRequest {}
+message GetOutgoingFriendRequestsRequest {}
 
-message GetOutgoingAsyncFriendRequestsResponse {
+message GetOutgoingFriendRequestsResponse {
     repeated FriendInfo friend_infos = 1;
     repeated string messages = 2;
+    enum FriendRequestType {
+        ASYNC = 0;
+        SYNC = 1;
+    }
+    repeated FriendRequestType friend_request_types = 3;
 }
 
 message GetIncomingAsyncFriendRequestsRequest {}

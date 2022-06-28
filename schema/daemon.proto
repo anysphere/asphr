@@ -247,4 +247,5 @@ message ChangeLatencyRequest {
 message ChangeLatencyResponse {}
 
 message KillRequest {}
+
 message KillResponse {}

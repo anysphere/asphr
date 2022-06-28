@@ -106,16 +106,19 @@ message AddAsyncFriendResponse {}
 
 message GetOutgoingFriendRequestsRequest {}
 
+message FriendRequest {
+    FriendInfo friend_info = 1;
+    string message = 2; // this may be "" (the empty string) if it is a sync request
+}
+
 message GetOutgoingFriendRequestsResponse {
-    repeated FriendInfo friend_infos = 1;
-    repeated string messages = 2;
+    repeated FriendRequest friend_requests = 1;
 }
 
 message GetIncomingAsyncFriendRequestsRequest {}
 
 message GetIncomingAsyncFriendRequestsResponse {
-    repeated FriendInfo friend_infos = 1;
-    repeated string messages = 2;
+    repeated FriendRequest friend_requests = 1;
 }
 
 message DecideAsyncFriendRequestRequest {

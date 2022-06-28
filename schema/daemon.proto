@@ -16,31 +16,29 @@ package asphrdaemon;
 service Daemon {
     rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse) {}
 
-    rpc GetFriendList(GetFriendListRequest) returns (GetFriendListResponse) {}
-
     rpc GetMyPublicID(GetMyPublicIDRequest) returns (GetMyPublicIDResponse) {}
 
-    // use for in-person key exchange
-    rpc AddSyncFriend(AddSyncFriendRequest) returns (AddSyncFriendResponse) {}
+    rpc GetFriendList(GetFriendListRequest) returns (GetFriendListResponse) {}
+    rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {}
 
+    // Invitations (async + sync) section. Sync \similarTo InPerson.
+    rpc AddSyncFriend(AddSyncFriendRequest) returns (AddSyncFriendResponse) {}
     rpc AddAsyncFriend(AddAsyncFriendRequest) returns (AddAsyncFriendResponse) {}
 
-    rpc GetOutgoingFriendRequests(GetOutgoingFriendRequestsRequest) returns (GetOutgoingFriendRequestsResponse) {}
+    rpc GetOutgoingSyncInvitations(GetOutgoingSyncInvitationsRequest) returns (GetOutgoingSyncInvitationsResponse) {}
+    rpc GetOutgoingAsyncInvitations(GetOutgoingAsyncInvitationsRequest) returns (GetOutgoingAsyncInvitationsResponse) {}
 
-    rpc GetIncomingAsyncFriendRequests(GetIncomingAsyncFriendRequestsRequest) returns (GetIncomingAsyncFriendRequestsResponse) {}
+    rpc GetIncomingAsyncInvitations(GetIncomingAsyncInvitationsRequest) returns (GetIncomingAsyncInvitationsResponse) {}
 
-    rpc DecideAsyncFriendRequest(DecideAsyncFriendRequestRequest) returns (DecideAsyncFriendRequestResponse) {}
-
-    rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {}
+    rpc AcceptAsyncInvitation(AcceptAsyncInvitationRequest) returns (AcceptAsyncInvitationResponse) {}
+    rpc RejectAsyncInvitation(RejectAsyncInvitationRequest) returns (RejectAsyncInvitationResponse) {}
 
     rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
 
+    // Get Messages section
     rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
-
     rpc GetMessagesStreamed(GetMessagesRequest) returns (stream GetMessagesResponse) {}
-
     rpc GetOutboxMessages(GetOutboxMessagesRequest) returns (GetOutboxMessagesResponse) {}
-
     rpc GetSentMessages(GetSentMessagesRequest) returns (GetSentMessagesResponse) {}
 
     rpc MessageSeen(MessageSeenRequest) returns (MessageSeenResponse) {}
@@ -105,29 +103,60 @@ message AddAsyncFriendRequest {
 
 message AddAsyncFriendResponse {}
 
-message GetOutgoingFriendRequestsRequest {}
+message GetOutgoingSyncInvitationsRequest {}
 
-message FriendRequest {
-    FriendInfo friend_info = 1;
-    string message = 2; // this may be "" (the empty string) if it is a sync request
+message GetOutgoingSyncInvitationsResponse {
+    message OutgoingSyncInvitationInfo {
+        string unique_name = 1;
+        string display_name = 2;
+        string story = 3;
+        google.protobuf.Timestamp sent_at = 4;
+    }
+    repeated OutgoingSyncInvitationInfo invitations = 1;
 }
 
-message GetOutgoingFriendRequestsResponse {
-    repeated FriendRequest friend_requests = 1;
+message GetOutgoingAsyncInvitationsRequest {}
+
+message GetOutgoingAsyncInvitationsResponse {
+    message OutgoingAsyncInvitationInfo {
+        string unique_name = 1;
+        string display_name = 2;
+        string public_id = 3;
+        string message = 4;
+        google.protobuf.Timestamp sent_at = 5;
+    }
+    repeated OutgoingAsyncInvitationInfo invitations = 1;
 }
 
-message GetIncomingAsyncFriendRequestsRequest {}
-
-message GetIncomingAsyncFriendRequestsResponse {
-    repeated FriendRequest friend_requests = 1;
+message GetIncomingAsyncInvitationsRequest {
+    // TODO(sualeh): make it optionally take a public_id
+    // optional string public_id = 1;
 }
 
-message DecideAsyncFriendRequestRequest {
-    string unique_name = 1;
-    bool accept = 2;
+message GetIncomingAsyncInvitationsResponse {
+    message IncomingAsyncInvitationInfo {
+        string public_id = 1;
+        string message = 2;
+        google.protobuf.Timestamp received_at = 3;
+    }
+    repeated IncomingAsyncInvitationInfo invitations = 1;
 }
 
-message DecideAsyncFriendRequestResponse {}
+// accepts an async friend requestj
+message AcceptAsyncInvitationRequest {
+    string public_id = 1;
+    string unique_name = 2;
+    string display_name = 3;
+}
+
+message AcceptAsyncInvitationResponse {}
+
+// rejects an async friend requestj
+message RejectAsyncInvitationRequest {
+    string public_id = 1;
+}
+
+message RejectAsyncInvitationResponse {}
 
 message RemoveFriendRequest {
     string unique_name = 1;

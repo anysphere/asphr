@@ -61,18 +61,17 @@ message RegisterUserResponse {}
 
 message GetFriendListRequest {}
 
-enum FriendRequestProgress {
-    Incoming = 0;
-    OutgoingAsync = 1;
-    OutgoingSync = 2;
-    Complete = 3;
+enum InvitationProgress {
+    OutgoingAsync = 0;    
+    OutgoingSync = 1;
+    Complete = 2;
 }
 
 message FriendInfo {
     string unique_name = 1;
     string display_name = 2;
     string public_id = 3;
-    FriendRequestProgress request_progress = 4;
+    InvitationProgress invitation_progress = 4;
 }
 
 message GetFriendListResponse {

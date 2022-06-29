@@ -29,6 +29,7 @@ def load_asphr_repos(asphr_path):
     )
 
     # TODO(sualeh): this should be upgraded to something stable.
+    # Bug, main issue: cyclic dependency for rules_nodejs??
     # http_archive(
     #     name = "rules_proto_grpc",
     #     sha256 = "a0519dccb89582a403a585fbdcd927d36894d43b5d9e71f445221d221d7106fd",

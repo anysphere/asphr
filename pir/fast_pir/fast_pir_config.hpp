@@ -63,7 +63,7 @@ static auto create_context_params() -> seal::EncryptionParameters {
   return params;
 }
 
-constexpr size_t SEAL_DB_COLUMNS = CEIL_DIV(MESSAGE_SIZE_BITS, PLAIN_BITS);
+constexpr int SEAL_DB_COLUMNS = CEIL_DIV(MESSAGE_SIZE_BITS, PLAIN_BITS);
 
 // CLIENT_DB_ROWS is the number of rows that the client thinks is in the
 // database. this must be an upper bound on the actual database size. note that
@@ -77,4 +77,4 @@ constexpr size_t SEAL_DB_COLUMNS = CEIL_DIV(MESSAGE_SIZE_BITS, PLAIN_BITS);
 // is to be under the GRPC message size limit of 4 MB — to increase this, use
 // GRPC streaming instead. See
 // https://jbrandhorst.com/post/grpc-binary-blob-stream/.
-constexpr size_t CLIENT_DB_ROWS = 360'000;
+constexpr int CLIENT_DB_ROWS = 360'000;

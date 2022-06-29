@@ -31,6 +31,9 @@ def load_asphr_repos5(asphr_path):
                 version = "0.24.2",
                 features = ["bundled"],
             ),
+            "anyhow": crate.spec(
+                version = "1.0",
+            ),
         },
         # Setting the default package name to `""` forces the use of the macros defined in this repository
         # to always use the root package when looking for dependencies or aliases. This should be considered
@@ -39,7 +42,7 @@ def load_asphr_repos5(asphr_path):
             default_package_name = "",
         ),
     )
-    
+
     rust_cxx_vendor(
         name = "third-party",
         cargo_version = RUST_VERSION,

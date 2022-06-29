@@ -13,6 +13,11 @@ syntax = "proto3";
 
 package asphrclient;
 
+// keep this in sync with db.rs, SystemMessage
+enum SystemMessage {
+    OUTGOING_INVITATION = 0;
+}
+
 // Given that we have a very very limited bandwidth, our goal is to define a Message type that is as small
 // as possible.
 //
@@ -42,10 +47,6 @@ message Message {
     // 
     // true iff this message is a system message
     bool system = 5;
-    // keep this in sync with db.rs, SystemMessage constants
-    enum SystemMessage {
-        OUTGOING_INVITATION = 0;
-    }
     SystemMessage system_message = 6;
     string system_message_data = 7; // optional data for the system message
 }

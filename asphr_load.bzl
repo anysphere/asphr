@@ -28,20 +28,28 @@ def load_asphr_repos(asphr_path):
         url = "https://github.com/grailbio/bazel-toolchain/archive/{tag}.tar.gz".format(tag = BAZEL_TOOLCHAIN_TAG),
     )
 
+    # TODO(sualeh): this should be upgraded to something stable.
+    # http_archive(
+    #     name = "rules_proto_grpc",
+    #     sha256 = "a0519dccb89582a403a585fbdcd927d36894d43b5d9e71f445221d221d7106fd",
+    #     strip_prefix = "rules_proto_grpc-7ceb4ffaeaa9b3a4734bc7669b2a1c5aa65d9d73",
+    #     urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/7ceb4ffaeaa9b3a4734bc7669b2a1c5aa65d9d73.tar.gz"],
+    # )
+
     http_archive(
         name = "rules_proto_grpc",
         sha256 = "507e38c8d95c7efa4f3b1c0595a8e8f139c885cb41a76cab7e20e4e67ae87731",
         strip_prefix = "rules_proto_grpc-4.1.1",
         urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.1.1.tar.gz"],
-    )
+    )   
+
 
     http_archive(
         name = "rules_proto",
-        sha256 = "e017528fd1c91c5a33f15493e3a398181a9e821a804eb7ff5acdd1d2d6c2b18d",
-        strip_prefix = "rules_proto-4.0.0-3.20.0",
+        sha256 = "9850fcf6ad40fa348e6f13b2cfef4bb4639762f804794f2bf61d988f4ba0dae9",
+        strip_prefix = "rules_proto-4.0.0-3.19.2-2",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
-            "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
+            "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.19.2-2.tar.gz",
         ],
     )
 

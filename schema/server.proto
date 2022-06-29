@@ -15,14 +15,14 @@ service Server {
   rpc ReceiveMessage(ReceiveMessageInfo) returns (ReceiveMessageResponse) {}
 
   // Making Friends protobufs
-  rpc AddFriendAsync(AddFriendAsyncInfo) returns (AddFriendAsyncResponse) {}
+  rpc AddAsyncInvitation(AddAsyncInvitationInfo) returns (AddAsyncInvitationResponse) {}
 
-  rpc GetAsyncFriendRequests(GetAsyncFriendRequestsInfo) returns (GetAsyncFriendRequestsResponse) {}
+  rpc GetAsyncInvitations(GetAsyncInvitationsInfo) returns (GetAsyncInvitationsResponse) {}
 }
 
 // The RegisterInfo message is sent to the server to register a new user.
 message RegisterInfo { 
-  bytes friend_request_public_key = 1;
+  bytes invitation_public_key = 1;
   string beta_key = 2;
 }
 
@@ -52,21 +52,21 @@ message ReceiveMessageResponse {
   bytes pir_answer_acks = 2;
 }
 
-message AddFriendAsyncInfo {
+message AddAsyncInvitationInfo {
   int32 index = 1;
-  bytes request = 2;
+  bytes invitation = 2;
   string authentication_token = 3;
 }
 
-message AddFriendAsyncResponse {
+message AddAsyncInvitationResponse {
 }
 
-message GetAsyncFriendRequestsInfo {
+message GetAsyncInvitationsInfo {
   int32 start_index = 1;
   int32 end_index = 2;
 }
 
-message GetAsyncFriendRequestsResponse {
-  repeated bytes requests = 1;
-  repeated bytes friend_request_public_key = 2;
+message GetAsyncInvitationsResponse {
+  repeated bytes invitations = 1;
+  repeated bytes invitation_public_key = 2;
 }

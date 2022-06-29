@@ -38,13 +38,14 @@ message Message {
     // this field is not set if the message isn't long.
     uint32 chunks_start_sequence_number = 4;
 
-    // control messages below. none of the fields below will be set for actual messages.
+    // system messages below. none of the fields below will be set for actual messages.
     // 
-    // true iff this message is a control message
-    bool control = 5;
-    // keep this in sync with db.rs, ControlMessage constants
-    enum ControlMessage {
-        OUTGOING_FRIEND_REQUEST = 0;
+    // true iff this message is a system message
+    bool system = 5;
+    // keep this in sync with db.rs, SystemMessage constants
+    enum SystemMessage {
+        OUTGOING_INVITATION = 0;
     }
-    ControlMessage control_message = 6;
+    SystemMessage system_message = 6;
+    string system_message_data = 7; // optional data for the system message
 }

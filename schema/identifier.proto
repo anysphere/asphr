@@ -37,7 +37,7 @@ message PublicID {
     // other indices. this is just for bootstrapping.
     uint32 index = 1;
     // the public-key crypto public key, used for handling friend requests.
-    bytes friend_request_public_key = 2;
+    bytes invitation_public_key = 2;
     // the key-exchange public key, used for adding a friend in the two-way situation.
     bytes kx_public_key = 3;
     // whether the friend request should be sent instantly or not
@@ -45,5 +45,5 @@ message PublicID {
     // at the same time as the other person.
     // it should also only be true if this person monitors the friend requests often,
     // which few accounts will do (and there will probably be an associated cost with doing so)
-    // bool instant_friend_requests = 4; // TODO: when we implement the instant friend request, add this in
+    // bool instant_invitations = 4; // TODO: when we implement the instant friend request, add this in
 }

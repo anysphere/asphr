@@ -69,14 +69,13 @@ using absl::Time;
 
 using std::unordered_map;
 using std::unordered_set;
-} // namespace asphr
+}  // namespace asphr
 
 #define CEIL_DIV(a, b) (((a) + (b)-1) / (b))
 
 // MESSAGE_SIZE is the size of the message in bytes
 constexpr size_t MESSAGE_SIZE = 1024;
 constexpr size_t MESSAGE_SIZE_BITS = MESSAGE_SIZE * 8;
-constexpr size_t ASYNC_FRIEND_REQUEST_SIZE = MESSAGE_SIZE;
 
 // pir_value is the type of the value stored at one index in the database
 using pir_value_t = array<byte, MESSAGE_SIZE>;

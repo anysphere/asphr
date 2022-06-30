@@ -42,6 +42,16 @@ cc_proto_library(
 )
 
 proto_library(
+    name = "asyncinvitation_proto",
+    srcs = ["asyncinvitation.proto"],
+)
+
+cc_proto_library(
+    name = "asyncinvitation_proto_cc",
+    deps = [":asyncinvitation_proto"],
+)
+
+proto_library(
     name = "identifier_proto",
     srcs = ["identifier.proto"],
 )

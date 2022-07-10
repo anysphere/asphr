@@ -89,8 +89,8 @@ message GetMyPublicIDRequest {}
 
 message GetMyPublicIDResponse {
   string public_id = 1;
-  string story =
-      2; // en encoding of the public identifier in a nice story format
+  string story = 2; 
+  // en encoding of the public identifier in a nice story format
 }
 
 message AddSyncFriendRequest {
@@ -226,6 +226,7 @@ message GetOutboxMessagesResponse { repeated OutgoingMessage messages = 1; }
 
 message GetSentMessagesRequest {}
 
+// Returns all messages that have eent to atleast one peroson.
 message GetSentMessagesResponse { repeated OutgoingMessage messages = 1; }
 
 message MessageSeenRequest { int32 id = 1; }

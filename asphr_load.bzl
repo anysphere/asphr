@@ -42,8 +42,7 @@ def load_asphr_repos(asphr_path):
         sha256 = "507e38c8d95c7efa4f3b1c0595a8e8f139c885cb41a76cab7e20e4e67ae87731",
         strip_prefix = "rules_proto_grpc-4.1.1",
         urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.1.1.tar.gz"],
-    )   
-
+    )
 
     http_archive(
         name = "rules_proto",
@@ -72,7 +71,7 @@ def load_asphr_repos(asphr_path):
         name = "com_google_googletest",
         sha256 = "872e31f550e261936fc3aff1d0b5b454924466d4933aa4af1444af189fdd8598",
         strip_prefix = "googletest-d9335595b4cd73c8450c18e4dbf1ee0801c23c2e",
-        urls = ["https://github.com/google/googletest/archive/d9335595b4cd73c8450c18e4dbf1ee0801c23c2e.zip"], # master as of 2022-06-29
+        urls = ["https://github.com/google/googletest/archive/d9335595b4cd73c8450c18e4dbf1ee0801c23c2e.zip"],  # master as of 2022-06-29
     )
 
     http_archive(

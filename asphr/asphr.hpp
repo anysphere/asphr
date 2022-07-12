@@ -74,6 +74,7 @@ using std::unordered_set;
 #define CEIL_DIV(a, b) (((a) + (b)-1) / (b))
 
 // MESSAGE_SIZE is the size of the message in bytes
+// this refers to the size of a CHUNK, not a complete message
 constexpr size_t MESSAGE_SIZE = 1024;
 constexpr size_t MESSAGE_SIZE_BITS = MESSAGE_SIZE * 8;
 

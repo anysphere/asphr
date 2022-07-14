@@ -69,7 +69,7 @@ using absl::Time;
 
 using std::unordered_map;
 using std::unordered_set;
-}  // namespace asphr
+} // namespace asphr
 
 #define CEIL_DIV(a, b) (((a) + (b)-1) / (b))
 

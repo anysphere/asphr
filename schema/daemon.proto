@@ -89,7 +89,7 @@ message GetMyPublicIDRequest {}
 
 message GetMyPublicIDResponse {
   string public_id = 1;
-  string story = 2; 
+  string story = 2;
   // en encoding of the public identifier in a nice story format
 }
 
@@ -205,7 +205,7 @@ message OutgoingFriend {
 message OutgoingMessage {
   int32 uid = 1;
   string message = 2;
-  
+
   repeated OutgoingFriend to_friends = 3;
   google.protobuf.Timestamp sent_at = 4;
 }

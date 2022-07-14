@@ -226,7 +226,6 @@ message GetOutboxMessagesResponse { repeated OutgoingMessage messages = 1; }
 
 message GetSentMessagesRequest {}
 
-// Returns all messages that have eent to atleast one peroson.
 message GetSentMessagesResponse { repeated OutgoingMessage messages = 1; }
 
 message MessageSeenRequest { int32 id = 1; }

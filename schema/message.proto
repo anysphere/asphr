@@ -23,6 +23,8 @@ enum SystemMessage { OUTGOING_INVITATION = 0; }
 message Message {
   repeated string other_recipients = 1;
   string msg = 2;
+  bytes hash_digest = 3;
+  bytes reply_to_msg = 4;
 }
 
 // Given that we have a very very limited bandwidth, our goal is to define a

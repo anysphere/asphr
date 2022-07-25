@@ -37,6 +37,8 @@ service Daemon {
       returns (AcceptAsyncInvitationResponse) {}
   rpc RejectAsyncInvitation(RejectAsyncInvitationRequest)
       returns (RejectAsyncInvitationResponse) {}
+  rpc CancelAsyncInvitation(CancelAsyncInvitationRequest)
+      returns (CancelAsyncInvitationResponse) {}
 
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
 
@@ -162,6 +164,10 @@ message AcceptAsyncInvitationResponse {}
 message RejectAsyncInvitationRequest { string public_id = 1; }
 
 message RejectAsyncInvitationResponse {}
+
+message CancelAsyncInvitationRequest { string public_id = 1; }
+
+message CancelAsyncInvitationResponse {}
 
 message RemoveFriendRequest { string unique_name = 1; }
 

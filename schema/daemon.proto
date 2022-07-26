@@ -17,7 +17,8 @@ service Daemon {
   rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse) {}
 
   rpc GetMyPublicID(GetMyPublicIDRequest) returns (GetMyPublicIDResponse) {}
-  rpc IsValidPublicID(IsValidPublicIDRequest) returns (IsValidPublicIDResponse) {}
+  rpc IsValidPublicID(IsValidPublicIDRequest)
+      returns (IsValidPublicIDResponse) {}
 
   rpc GetFriendList(GetFriendListRequest) returns (GetFriendListResponse) {}
   rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {}
@@ -96,13 +97,9 @@ message GetMyPublicIDResponse {
   // en encoding of the public identifier in a nice story format
 }
 
-message IsValidPublicIDRequest {
-  string public_id = 1;
-}
+message IsValidPublicIDRequest { string public_id = 1; }
 
-message IsValidPublicIDResponse {
-  bool valid = 1;
-}
+message IsValidPublicIDResponse { bool valid = 1; }
 
 message AddSyncFriendRequest {
   string unique_name = 1;

@@ -79,6 +79,7 @@ class FastPIRClient {
         evaluator(sc) {}
 
   auto query(pir_index_t index, size_t db_rows) const -> pir_query_t {
+    //
     assert(index < db_rows);
     vector<seal::Serializable<seal::Ciphertext>> query;
     auto seal_db_rows = CEIL_DIV(db_rows, seal_slot_count);

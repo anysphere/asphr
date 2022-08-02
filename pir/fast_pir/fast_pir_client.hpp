@@ -42,8 +42,6 @@ class FastPIRClient {
   using pir_answer_t = FastPIRAnswer;
   using pir_map = std::map<pir_index_t, keys>;
 
-  // TODO: fix this absolute mess of initializers???
-
   FastPIRClient() : FastPIRClient(create_context_params()) {
     ASPHR_LOG_INFO("Creating FastPIRClient.", from, "base");
   }
@@ -161,18 +159,16 @@ class FastPIRClient {
   }
 
  private:
-  // because we "batch" PIR encryption together, we need to know the keypair
-  // corresponding to each index
   seal::SEALContext sc;
   seal::BatchEncoder batch_encoder;
   // number of slots in the plaintext
   const size_t seal_slot_count;
-  // maps index to keys
   seal::Evaluator evaluator;
 
+  // because we "batch" PIR encryption together, we need to know the keypair
+  // corresponding to each index.
+  // A Map (index -> keypair)
   pir_map keys_map;
-
-  // create maps mapping indices to keys
 
   auto deserialize_secret_key(seal::SEALContext sc, string secret_key)
       -> seal::SecretKey {

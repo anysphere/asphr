@@ -78,3 +78,4 @@ constexpr int SEAL_DB_COLUMNS = CEIL_DIV(MESSAGE_SIZE_BITS, PLAIN_BITS);
 // GRPC streaming instead. See
 // https://jbrandhorst.com/post/grpc-binary-blob-stream/.
 constexpr int CLIENT_DB_ROWS = 360'000;
+

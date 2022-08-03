@@ -75,6 +75,12 @@ def load_asphr_repos(asphr_path):
     )
 
     http_archive(
+        name = "com_google_benchmark",
+        strip_prefix = "benchmark-1.6.1",
+        urls = ["https://github.com/google/benchmark/archive/v1.6.1.zip"],
+    )
+
+    http_archive(
         name = "com_github_gperftools_gperftools",
         build_file = asphr_path + "//:gperftools.BUILD",
         patch_args = ["-p1"],

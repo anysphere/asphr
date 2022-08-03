@@ -50,6 +50,8 @@ Default is ASPHR_LOGLEVEL_DBG.
 // ASPHR_LOG_INFO(msg, key, value, key, value, ...)
 // ASPHR_LOG_DBG(msg, key, value, key, value, ...)
 
+#define ASPHR_LOGLEVEL_NONE
+
 #if !defined(ASPHR_LOGLEVEL_NONE) && !defined(ASPHR_LOGLEVEL_ERR) &&  \
     !defined(ASPHR_LOGLEVEL_WARN) && !defined(ASPHR_LOGLEVEL_INFO) && \
     !defined(ASPHR_LOGLEVEL_DBG)

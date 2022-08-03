@@ -79,7 +79,7 @@ Default is ASPHR_LOGLEVEL_DBG.
 #define ASPHR_LOG_ERR(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "ERR", __VA_ARGS__)
 #else
-#define ASPHR_LOG_ERR(msg, ...) static_cast<void>(0)
+#define ASPHR_LOG_ERR(msg, ...) static_cast<void>(0);
 #endif
 
 #if defined(ASPHR_LOGLEVEL_WARN) || defined(ASPHR_LOGLEVEL_INFO) || \
@@ -87,19 +87,19 @@ Default is ASPHR_LOGLEVEL_DBG.
 #define ASPHR_LOG_WARN(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "WARN", __VA_ARGS__)
 #else
-#define ASPHR_LOG_WARN(msg, ...) static_cast<void>(0)
+#define ASPHR_LOG_WARN(msg, ...) static_cast<void>(0);
 #endif
 
 #if defined(ASPHR_LOGLEVEL_INFO) || defined(ASPHR_LOGLEVEL_DBG)
 #define ASPHR_LOG_INFO(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "INFO", __VA_ARGS__)
 #else
-#define ASPHR_LOG_INFO(msg, ...) static_cast<void>(0)
+#define ASPHR_LOG_INFO(msg, ...) static_cast<void>(0);
 #endif
 
 #if defined(ASPHR_LOGLEVEL_DBG)
 #define ASPHR_LOG_DBG(msg, ...) \
   ASPHR_DO_LOG_INTERNAL_DO_NOT_USE(msg, "DBG", __VA_ARGS__)
 #else
-#define ASPHR_LOG_DBG(msg, ...) static_cast<void>(0)
+#define ASPHR_LOG_DBG(msg, ...) static_cast<void>(0);
 #endif

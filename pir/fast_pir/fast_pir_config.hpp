@@ -52,14 +52,19 @@ static_assert(
 // seems unnecessary to code this up just to check this. VERIFY MANUALLY.
 
 static auto create_context_params() -> seal::EncryptionParameters {
+  std::cout << "lalalala" << std::endl;
   seal::EncryptionParameters params(seal::scheme_type::bfv);
+  std::cout << "lalalala" << std::endl;
   params.set_poly_modulus_degree(POLY_MODULUS_DEGREE);
+  std::cout << "lalalala" << std::endl;
   vector<seal::Modulus> coeff_modulus;
-  for (auto &prime : COEFF_MODULUS_FACTORIZATION) {
+  for (auto& prime : COEFF_MODULUS_FACTORIZATION) {
     coeff_modulus.push_back(seal::Modulus(prime));
   }
+  std::cout << "lalalala" << std::endl;
   params.set_coeff_modulus(coeff_modulus);
   params.set_plain_modulus(PLAIN_MODULUS);
+  std::cout << "lalalala" << std::endl;
   return params;
 }
 

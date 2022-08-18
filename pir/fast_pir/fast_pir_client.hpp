@@ -65,6 +65,11 @@ class FastPIRClient {
     const auto new_keys = generate_keys();
     const auto secret_key = this->deserialize_secret_key(sc, new_keys.first);
     const auto galois_keys = Galois_string(new_keys.second);
+
+    // cout the size of the galois keys
+    std::cout << "galois keys size: " << galois_keys.galois_string.size()
+              << std::endl;
+
     // assign new keys to the keys map
     // note: you can save some time for the dummy index here.
     keys_map.insert_or_assign(index, keys{secret_key, galois_keys});
